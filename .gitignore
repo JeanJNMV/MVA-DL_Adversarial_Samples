@@ -1,5 +1,6 @@
 .vscode/
 __pycache__/
+.DS_Store
 
 VOCtest_06-Nov-2007/
 VOCtrainval_06-Nov-2007/
