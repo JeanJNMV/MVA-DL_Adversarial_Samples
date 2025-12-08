@@ -1,0 +1,10 @@
+.vscode/
+__pycache__/
+
+VOCtest_06-Nov-2007/
+VOCtrainval_06-Nov-2007/
+VOC_YOLO/
+adv_VOC_YOLO_eps_*/
+
+models/
+predictions/
