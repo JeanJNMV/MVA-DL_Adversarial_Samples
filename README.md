@@ -1,0 +1,18 @@
+# Deep Learning: Article study
+## Explaining and Harnessing Adversarial Examples
+
+This repository contains the code related to the review by Adonis Jamal and Jean-Vincent Martini of the article "Explaining and Harnessing Adversarial Examples", written Ian J. Goodfellow, Jonathon Shlens, and Christian Szegedy, for the Deep Learning course of master's degree MVA and CentraleSupélec.
+
+Specifically, this code implements the Fast Gradient Sign Method (FGSM) to generate adversarial examples in object detection using mostly the YOLO11n model on the VOC dataset.
+
+The scripts provided in this repository are as follows:
+- ```convert_voc_to_yolo_format.py```: a script to convert the VOC dataset into YOLO format.
+- ```create_adv_dataset.py```: a script to create a dataset of adversarial examples using FGSM attack. The parameter $\epsilon$ can be adjusted to control the perturbation level.
+- ```eval_for_base_model.py```: a script to evaluate the performance of a YOLO11n model on a VOC-like dataset. The parameter $\epsilon$ can be adjusted to evaluate the model on adversarial examples with a single specific perturbation level. If not set, the model is evaluated on a already set list of $\epsilon$ values.
+- ```eval_for_ft_model.py```: a script to evaluate the performance of a fine-tuned YOLO11n model on a VOC-like dataset. The parameter is similar to the one in ```eval_for_base_model.py```. This script is basically a faster version of the previous one but only for fine-tuned models on VOC.
+- ```eval_for_ssd.py```: a script to evaluate the performance of a SSDlite MobileNetV3 model on a VOC-like dataset. The parameter is similar to the one in ```eval_for_base_model.py```. 
+- ```print_bbxoes.py```: a utility script to print the bounding boxes of the images of a dataset.
+- ```training.py```: a script to fine-tune a YOLO11n model on a VOC-like dataset with Ultralytics.
+- ```plot_results.py```: a script to plot the results of the evaluations, used in the report to generate the graphs.
+
+```results_curves/``` is a folder containing the results of the evaluations in .json format. ```res_colab/``` is a folder containing the metrics obtained when fine-tuning the models on Google Colab.
