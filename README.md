@@ -7,10 +7,10 @@ Specifically, this code implements the Fast Gradient Sign Method (FGSM) to gener
 
 The scripts provided in this repository are as follows:
 - ```convert_voc_to_yolo_format.py```: a script to convert the VOC dataset into YOLO format.
-- ```create_adv_dataset.py```: a script to create a dataset of adversarial examples using FGSM attack. The parameter $\epsilon$ can be adjusted to control the perturbation level.
-- ```eval_for_base_model.py```: a script to evaluate the performance of a YOLO11n model on a VOC-like dataset. The parameter $\epsilon$ can be adjusted to evaluate the model on adversarial examples with a single specific perturbation level. If not set, the model is evaluated on a already set list of $\epsilon$ values.
-- ```eval_for_ft_model.py```: a script to evaluate the performance of a fine-tuned YOLO11n model on a VOC-like dataset. The parameter is similar to the one in ```eval_for_base_model.py```. This script is basically a faster version of the previous one but only for fine-tuned models on VOC.
-- ```eval_for_ssd.py```: a script to evaluate the performance of a SSDlite MobileNetV3 model on a VOC-like dataset. The parameter is similar to the one in ```eval_for_base_model.py```. 
+- ```create_adv_dataset.py```: a script to create a dataset of adversarial examples using FGSM attack. The parameter $\varepsilon$ can be adjusted to control the perturbation level.
+- ```eval_for_base_model.py```: a script to evaluate the performance of a YOLO11n model on a VOC-like dataset. The parameter $\varepsilon$ can be adjusted to evaluate the model on adversarial examples with a single specific perturbation level. If not set, the model is evaluated on a already set list of $\varepsilon$ values.
+- ```eval_for_ft_model.py```: a script to evaluate the performance of a fine-tuned YOLO11n model on a VOC-like dataset. The parameter $\varepsilon$ is similar to the one in ```eval_for_base_model.py```. This script is basically a faster version of the previous one but only for fine-tuned models on VOC.
+- ```eval_for_ssd.py```: a script to evaluate the performance of a SSDlite MobileNetV3 model on a VOC-like dataset. The parameter $\varepsilon$ is similar to the one in ```eval_for_base_model.py```. 
 - ```print_bbxoes.py```: a utility script to print the bounding boxes of the images of a dataset.
 - ```training.py```: a script to fine-tune a YOLO11n model on a VOC-like dataset with Ultralytics.
 - ```plot_results.py```: a script to plot the results of the evaluations, used in the report to generate the graphs.
