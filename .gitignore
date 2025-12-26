@@ -9,3 +9,17 @@ adv_VOC_YOLO_eps_*/
 
 models/
 predictions/
+
+.aux
+.bbl
+.bcf
+.blg
+.fdb_latexmk
+.fls
+.synctex.gz
+.log
+.nav
+.out
+.snm
+.toc
+.run.xml

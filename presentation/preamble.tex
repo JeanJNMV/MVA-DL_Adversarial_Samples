@@ -1,0 +1,77 @@
+% =========================
+% THEME & STYLE
+% =========================
+\usetheme{Madrid}
+\usecolortheme{default}
+\useoutertheme{split}
+\useinnertheme{circles}
+
+% =========================
+% PACKAGES
+% =========================
+\usepackage{xcolor}
+\usepackage{mathrsfs}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{animate}
+\usepackage{caption}
+\usepackage{bbm}
+\usepackage{bm}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+
+
+\captionsetup[figure]{font=tiny}
+
+% =========================
+% BIBLIOGRAPHY
+% =========================
+\usepackage[
+    backend=biber,
+    style=alphabetic,
+    sorting=ynt
+]{biblatex}
+\addbibresource{bib.bib}
+
+% =========================
+% COLORS (CS / ENS)
+% =========================
+\definecolor{CSred}{RGB}{160,32,60}
+\definecolor{CSgrey}{RGB}{136,121,150}
+\definecolor{UPSred}{RGB}{97,21,58}
+
+\setbeamercolor{titlelike}{bg=CSred}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamercolor{palette primary}{bg=CSred,fg=white}
+\setbeamercolor{palette secondary}{bg=CSred,fg=white}
+\setbeamercolor{palette tertiary}{bg=CSgrey,fg=white}
+\setbeamercolor{palette quaternary}{bg=CSgrey,fg=white}
+\setbeamercolor{structure}{fg=CSgrey}
+
+% =========================
+% METADATA
+% =========================
+\title[Deep Learning]{Deep Learning}
+\subtitle{Presentation}
+
+\author[Jamal, Martini]{
+Adonis~JAMAL \and Jean-Vincent~MARTINI\\
+Explaining and Harnessing Adversarial Examples
+}
+
+\institute[ENS Paris-Saclay, CentraleSupélec]{
+École Normale Supérieure Paris-Saclay - MVA\\
+CentraleSupélec - MDS
+}
+
+\date[Jan 06, 2026]{January 6th 2026}
+
+\titlegraphic{
+    \centering
+    \includegraphics[height=1.2cm]{img/logo_mva.jpg}
+    \hspace{1cm}
+    \includegraphics[height=1cm]{img/logo_ens-ps.png}
+    \hspace{1cm}
+    \includegraphics[height=1cm]{img/Logo_CentraleSupelec.svg.png}
+}

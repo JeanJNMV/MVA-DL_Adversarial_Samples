@@ -1,0 +1,197 @@
+\documentclass{beamer}
+
+\input{preamble}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\begin{frame}{Motivation \& Problem Statement}
+        \textbf{The Context:}
+        \begin{itemize}
+            \item Neural Networks are vulnerable to \textbf{Adversarial Examples}: inputs with worst-case perturbations causing high-confidence errors \cite{main}.
+            \item This is a security risk for safety-critical applications (e.g., autonomous driving).
+        \end{itemize}
+        
+        \begin{block}{Project Goals}
+            \begin{enumerate}
+            \item Analyze the seminal work by Goodfellow et al. (2015).
+            \item Extend the analysis from Classification to Object Detection (YOLO11n).
+        \end{enumerate}
+        \end{block}
+
+        % \centering
+        % \includegraphics[width=\linewidth]{../report/img/screen.png}
+        % \footnotesize{Visualizing weight filters \cite{main}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% METHODOLOGY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+\subsection{Theoretical Framework}
+\begin{frame}{Theoretical Framework: The Linearity Hypothesis}
+    \textbf{Why are deep networks vulnerable?}
+    \begin{itemize}
+        \item \emph{Old Hypothesis:} Overfitting or extreme non-linearity.
+        \item \emph{Goodfellow's Hypothesis:} Models are \textbf{"too linear"} in high-dimensional spaces.
+    \end{itemize}
+
+    \vspace{0.5cm}
+    Consider a linear activation $\bm{w}^\top \bm{x}$. With perturbation $\bm{\eta}$:
+    \begin{equation}
+        \bm{w}^\top (\bm{x} + \bm{\eta}) = \bm{w}^\top \bm{x} + \bm{w}^\top \bm{\eta}
+    \end{equation}
+    
+    If we set $\bm{\eta} = \varepsilon \cdot \text{sign}(\bm{w})$:
+    \begin{itemize}
+        \item The activation grows by $\varepsilon m n$ (where $n$ is dimensionality).
+        \item Many small changes accumulate to a massive shift in output.
+    \end{itemize}
+\end{frame}
+
+\subsection{Fast Gradient Sign Method}
+\begin{frame}{The Fast Gradient Sign Method (FGSM)}
+    FGSM is a single-shot attack designed to maximize loss under an $L_\infty$ constraint.
+    
+    \begin{block}{The Attack Formula}
+    \begin{equation}
+        \bm{\eta} = \varepsilon \cdot \text{sign}(\nabla_x J(\bm{\theta}, \bm{x}, y))
+    \end{equation}
+    \end{block}
+
+    \begin{itemize}
+        \item \textbf{Efficient:} Requires only one backpropagation pass.
+        \item \textbf{Dual Use:} Used for generating attacks and for adversarial training (regularization).
+        \item \textbf{Constraint:} $||\bm{\eta}||_{\infty} < \varepsilon$ ensures imperceptibility.
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESULTS & EXTENSIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results \& Extensions}
+\subsection{One-Stage Object Detection}
+\begin{frame}{Our Contribution: Object Detection Setup}
+    We extended the study to \textbf{One-Stage Detectors}.
+    \vspace{0.3cm}
+    \begin{columns}
+        \column{0.005\textwidth}
+
+        \column{0.595\textwidth}
+        \textbf{Experimental Setup:}
+        \begin{itemize}
+            \item \textbf{Target Model:} YOLO11n (Nano) \cite{yolo11_ultralytics}.
+            \item \textbf{Transfer Target:} SSDlite MobileNetV3.
+            \item \textbf{Dataset:} Trained on COCO, Evaluated on VOC2007.
+            \item \textbf{Metric:} Mean Average Precision (mAP) @ IoU=0.5.
+        \end{itemize}
+
+        \column{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{../report/img/009909_0.00.jpg} \\
+        \footnotesize{Clean Detection (Confidence 0.70)}
+    \end{columns}
+\end{frame}
+
+\subsection{Attack Results}
+\begin{frame}{Attack Results: Failure Modes}
+    FGSM successfully degrades detection performance, leading to three specific failure modes:
+    \vspace{0.3cm}
+    \begin{columns}
+        \column{0.33\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, height=0.8\linewidth]{../report/img/output/det_000018.jpg}
+        \footnotesize{\textbf{Fabrication:} Detecting non-existent objects.}
+
+        \column{0.33\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, height=0.8\linewidth]{../report/img/output/det_000049.jpg}
+        \footnotesize{\textbf{Mislabeling:} Predicting wrong classes.}
+
+        \column{0.33\textwidth}
+        \centering
+        \includegraphics[width=\linewidth, height=0.8\linewidth]{../report/img/009909_0.13.jpg}
+        \footnotesize{\textbf{Vanishing:} Valid objects erased from prediction.}
+    \end{columns}
+    
+    \vspace{0.3cm}
+    \textbf{Transferability:} Attacks generated for YOLO11n also degraded SSDlite (Black-box scenario), confirming the universality of the vulnerability.
+\end{frame}
+
+\subsection{Defense Results}
+\begin{frame}{Adversarial Training: The Trade-off}
+    We fine-tuned YOLO11n on adversarial examples.
+    \vspace{0.3cm}
+    
+    \begin{columns}
+        \column{0.4\textwidth}
+        \includegraphics[width=\linewidth]{../report/img/advtrained.png}
+        
+        \column{0.6\textwidth}
+        \textbf{Key Findings:}
+        \begin{itemize}
+            \item \textbf{Trade-off:} Increasing $\varepsilon$ improves robustness but degrades performance on clean images.
+            \item \textbf{Low $\varepsilon$ (0.02):} Negligible defense.
+            \item \textbf{High $\varepsilon$ (0.20):} Destroys clean accuracy.
+            \item \textbf{Sweet Spot:} We identified $\varepsilon \in [0.08, 0.10]$ as the optimal balance for this architecture.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\subsection{Critique of Imperceptibility}
+\begin{frame}{Critique of Imperceptibility}
+    Is $L_\infty$ a good proxy for human perception?
+    
+    \begin{columns}
+        \column{0.4\textwidth}
+        \includegraphics[width=\linewidth]{../report/img/worsedist.png}
+        
+        \column{0.6\textwidth}
+        \begin{itemize}
+            \item We compared $L_\infty$ against perceptual metrics: \textbf{SSIM} and \textbf{LPIPS}.
+            \item \textbf{Result:} While $L_\infty$ scales linearly with $\varepsilon$, perceptual degradation (LPIPS) is non-linear.
+            \item \textbf{Implication:} Future defenses should optimize against perceptual distances rather than simple pixel norms.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONCLUSION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+\subsection{Conclusion}
+\begin{frame}{Conclusion}
+    \begin{enumerate}
+        \item \textbf{Validation:} We confirmed Goodfellow's hypothesis that linearity is the primary cause of adversarial vulnerability.
+        \item \textbf{Generalization:} We showed these vulnerabilities persist in complex Object Detection tasks (YOLO11n).
+        \item \textbf{Defense:} Adversarial Training is effective but introduces a critical trade-off between robustness and standard accuracy.
+        \item \textbf{Future Work:} Investigating patch-based attacks and integrating perceptual metrics (LPIPS) into the loss function.
+    \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%
+% REFERENCES
+%%%%%%%%%%%%%%%%%
+\subsection{References}
+\begin{frame}[allowframebreaks]{Bibliography}
+    \frametitle{Bibliography}
+    \printbibliography[heading=none]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%
+% ANNEX
+%%%%%%%%%%%%%%%%%
+% \subsection{Annex}
+% \begin{frame}{Annex: Section}
+%     \frametitle{Annex title}
+%     
+% \end{frame}
+
+\end{document}

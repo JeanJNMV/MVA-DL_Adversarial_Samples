@@ -1,0 +1,1101 @@
+@article{main,
+  title={Explaining and harnessing adversarial examples},
+  author={Goodfellow, Ian J and Shlens, Jonathon and Szegedy, Christian},
+  journal={arXiv preprint arXiv:1412.6572},
+  year={2014}
+}
+
+@software{yolo11_ultralytics,
+  author = {Glenn Jocher and Jing Qiu},
+  title = {Ultralytics YOLO11},
+  version = {11.0.0},
+  year = {2024},
+  url = {https://github.com/ultralytics/ultralytics},
+  orcid = {0000-0001-5950-6979, 0000-0003-3783-7069},
+  license = {AGPL-3.0}
+}
+
+@inproceedings{COCO,
+  title={Microsoft coco: Common objects in context},
+  author={Lin, Tsung-Yi and Maire, Michael and Belongie, Serge and Hays, James and Perona, Pietro and Ramanan, Deva and Doll{\'a}r, Piotr and Zitnick, C Lawrence},
+  booktitle={European conference on computer vision},
+  pages={740--755},
+  year={2014},
+  organization={Springer}
+}
+
+@article{VOC,
+  title={The pascal visual object classes (voc) challenge},
+  author={Everingham, Mark and Van Gool, Luc and Williams, Christopher KI and Winn, John and Zisserman, Andrew},
+  journal={International journal of computer vision},
+  volume={88},
+  number={2},
+  pages={303--338},
+  year={2010},
+  publisher={Springer}
+}
+
+@article{OSFD, title={Transferable Adversarial Attacks for Object Detection Using Object-Aware Significant Feature Distortion}, volume={38}, url={https://ojs.aaai.org/index.php/AAAI/article/view/27920}, DOI={10.1609/aaai.v38i2.27920}, abstractNote={Transferable black-box adversarial attacks against classifiers by disturbing the intermediate-layer features have been extensively studied in recent years. However, these methods have not yet achieved satisfactory performances when directly applied to object detectors. This is largely because the features of detectors are fundamentally different from that of the classifiers. In this study, we propose a simple but effective method to improve the transferability of adversarial examples for object detectors by leveraging the properties of spatial consistency and limited equivariance of object detectors’ features. Specifically, we combine a novel loss function and deliberately designed data augmentation to distort the backbone features of object detectors by suppressing significant features corresponding to objects and amplifying the surrounding vicinal features corresponding to object boundaries. As such the target object and background area on the generated adversarial samples are more likely to be confused by other detectors. Extensive experimental results show that our proposed method achieves state-of-the-art black-box transferability for untargeted attacks on various models, including one/two-stage, CNN/Transformer-based, and anchor-free/anchor-based detectors.}, number={2}, journal={Proceedings of the AAAI Conference on Artificial Intelligence}, author={Ding, Xinlong and Chen, Jiansheng and Yu, Hongwei and Shang, Yu and Qin, Yining and Ma, Huimin}, year={2024}, month={Mar.}, pages={1546-1554} }
+
+@InProceedings{T-SEA,
+    author    = {Huang, Hao and Chen, Ziyan and Chen, Huanran and Wang, Yongtao and Zhang, Kevin},
+    title     = {{T-SEA}: {Transfer}-Based Self-Ensemble Attack on Object Detection},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {20514-20523}
+}
+
+@InProceedings{AdvtrainZhang,
+author = {Zhang, Haichao and Wang, Jianyu},
+title = {Towards Adversarially Robust Object Detection},
+booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+month = {October},
+year = {2019}
+}
+
+@article{AdvtrainGabor,
+author = {Amirkhani, A. and Karimi, M.P.},
+title = {Adversarial defenses for object detectors based on {Gabor} convolutional layers},
+journal = {Visual Computing},
+volume = {38},
+pages = {1929--1944},
+year = {2022},
+doi = {10.1007/s00371-021-02256-6}
+}
+
+@InProceedings{AdvtrainChen,
+    author    = {Chen, Pin-Chun and Kung, Bo-Han and Chen, Jun-Cheng},
+    title     = {Class-Aware Robust Adversarial Training for Object Detection},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {10420-10429}
+}
+
+@ARTICLE{LGP,
+  author={Li, Guopeng and Xu, Yue and Ding, Jian and Xia, Gui-Song},
+  journal={IEEE Transactions on Geoscience and Remote Sensing}, 
+  title={Toward Generic and Controllable Attacks Against Object Detection}, 
+  year={2024},
+  volume={62},
+  number={},
+  pages={1-12},
+  keywords={Perturbation methods;Detectors;Object detection;Proposals;Glass box;Robustness;Optimization;Adversarial examples (AE);controllable imperceptibility;generic attacks;object detection},
+  doi={10.1109/TGRS.2024.3417958}}
+
+
+@article{ASC,
+title = {To make yourself invisible with {Adversarial Semantic Contours}},
+journal = {Computer Vision and Image Understanding},
+volume = {230},
+pages = {103659},
+year = {2023},
+issn = {1077-3142},
+doi = {https://doi.org/10.1016/j.cviu.2023.103659},
+url = {https://www.sciencedirect.com/science/article/pii/S1077314223000395},
+author = {Yichi Zhang and Zijian Zhu and Hang Su and Jun Zhu and Shibao Zheng and Yuan He and Hui Xue},
+keywords = {Adversarial examples, Sparse attacks, Object detection, Detection transformer},
+abstract = {Modern object detectors are vulnerable to adversarial examples, which may bring risks to real-world applications. The sparse attack is an important task which, compared with the popular adversarial perturbation on the whole image, needs to select the potential pixels that is generally regularized by an ℓ0-norm constraint, and simultaneously optimize the corresponding texture. The non-differentiability of ℓ0 norm brings challenges and many works on attacking object detection adopted manually-designed patterns to address them, which are meaningless and independent of objects, and therefore lead to relatively poor attack performance. In this paper, we propose Adversarial Semantic Contour (ASC), an MAP estimate of a Bayesian formulation of sparse attack with a deceived prior of object contour. The object contour prior effectively reduces the search space of pixel selection and improves the attack by introducing more semantic bias. Extensive experiments demonstrate that ASC can corrupt the prediction of 9 modern detectors with different architectures (e.g., one-stage, two-stage and Transformer) by modifying fewer than 5% of the pixels of the object area in COCO in white-box scenario and around 10% of those in black-box scenario. We further extend the attack to datasets for autonomous driving systems to verify the effectiveness. We conclude with cautions about contour being the common weakness of object detectors with various architecture and the care needed in applying them in safety-sensitive scenarios.}
+}
+
+@article{TargConAtt,
+title = {Targeted context attack for object detection},
+journal = {Neurocomputing},
+volume = {601},
+pages = {128208},
+year = {2024},
+issn = {0925-2312},
+doi = {https://doi.org/10.1016/j.neucom.2024.128208},
+url = {https://www.sciencedirect.com/science/article/pii/S0925231224009792},
+author = {Changfeng Sun and Xuchong Zhang and Haoliang Han and Hongbin Sun},
+keywords = {Targeted attack, Object detection, Context},
+abstract = {Compared to the untargeted attack, the targeted attack is a more challenging task in the field of adversarial attacks for object detection, because it aims to mislead the detectors to predict certain specific wrong labels rather than arbitrary labels. The existing targeted attack methods are primarily implemented by maximizing the classification score of the target object, resulting in poor attack performance, especially in the case of a large gap between the correct label and the specified wrong label of the victim object. Considering the significant impact of contextual information on object detection, it is difficult to mislabel the victim object to a designated object which has low association with the original context. Therefore, we design a classification network to model the contextual information and propose a Targeted Context Attack method which changes not only the classification score of the victim object itself, but also the score of its context. The extensive experiments on MS COCO and VOC datasets using YOLOv3 and Faster RCNN show that the targeted context attack largely improves the fooling rate of targeted attack for object detection in terms of both white-box and black-box cases, even if the target object is totally dissimilar with the victim object. Specifically, the proposed attack method at most achieves a 21.8% improvement in the fooling rate for attacking YOLOv3.}
+}
+
+@ARTICLE{ShiftAtt,
+  author={Li, Hao and Yang, Zeyu and Gong, Maoguo and Chen, Shiguo and Qin, A. K. and Niu, Zhenxing and Wu, Yue and Zhou, Yu},
+  journal={IEEE Transactions on Circuits and Systems for Video Technology}, 
+  title={{ShiftAttack}: {Toward} Attacking the Localization Ability of Object Detector}, 
+  year={2024},
+  volume={34},
+  number={12},
+  pages={12796-12810},
+  keywords={Feature extraction;Fabrication;Perturbation methods;Location awareness;Pedestrians;Generative adversarial networks;Detection algorithms;Adversarial attack;object detector;bounding box;IoU;generative model;positive samples},
+  doi={10.1109/TCSVT.2024.3437482}}
+
+
+@InProceedings{PhantomSponges,
+    author    = {Shapira, Avishag and Zolfi, Alon and Demetrio, Luca and Biggio, Battista and Shabtai, Asaf},
+    title     = {{Phantom Sponges}: Exploiting Non-Maximum Suppression To Attack Deep Object Detectors},
+    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    month     = {January},
+    year      = {2023},
+    pages     = {4571-4580}
+}
+
+@InProceedings{ADC,
+    author    = {Yin, Mingjun and Li, Shasha and Song, Chengyu and Asif, M. Salman and Roy-Chowdhury, Amit K. and Krishnamurthy, Srikanth V.},
+    title     = {{ADC}: {Adversarial} Attacks Against Object Detection That Evade Context Consistency Checks},
+    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    month     = {January},
+    year      = {2022},
+    pages     = {3278-3287}
+}
+
+@InProceedings{EBAD,
+    author    = {Cai, Zikui and Tan, Yaoteng and Asif, M. Salman},
+    title     = {Ensemble-Based Blackbox Attacks on Dense Prediction},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {4045-4055}
+}
+
+@article{CAA, title={Context-Aware Transfer Attacks for Object Detection}, volume={36}, url={https://ojs.aaai.org/index.php/AAAI/article/view/19889}, DOI={10.1609/aaai.v36i1.19889}, abstractNote={Blackbox transfer attacks for image classifiers have been extensively studied in recent years. In contrast, little progress has been made on transfer attacks for object detectors. Object detectors take a holistic view of the image and the detection of one object (or lack thereof) often depends on other objects in the scene. This makes such detectors inherently context-aware and adversarial attacks in this space are more challenging than those targeting image classifiers. In this paper, we present a new approach to generate context-aware attacks for object detectors. We show that by using co-occurrence of objects and their relative locations and sizes as context information, we can successfully generate targeted mis-categorization attacks that achieve higher transfer success rates on blackbox object detectors than the state-of-the-art. We test our approach on a variety of object detectors with images from PASCAL VOC and MS COCO datasets and demonstrate up to 20 percentage points improvement in performance compared to the other state-of-the-art methods.}, number={1}, journal={Proceedings of the AAAI Conference on Artificial Intelligence}, author={Cai, Zikui and Xie, Xinxin and Li, Shasha and Yin, Mingjun and Song, Chengyu and Krishnamurthy, Srikanth V. and Roy-Chowdhury, Amit K. and Asif, M. Salman}, year={2022}, month={Jun.}, pages={149-157} }
+
+@inproceedings{TOG,
+  author={Chow, Ka-Ho and Liu, Ling and Loper, Margaret and Bae, Juhyun and Gursoy, Mehmet Emre and Truex, Stacey and Wei, Wenqi and Wu, Yanzhao},
+  booktitle={2020 Second IEEE International Conference on Trust, Privacy and Security in Intelligent Systems and Applications (TPS-ISA)}, 
+  title={Adversarial Objectness Gradient Attacks in Real-time Object Detection Systems}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={263-272},
+  keywords={Detectors;Object detection;Perturbation methods;Mathematical model;Training;Real-time systems;Proposals;object detection;adversarial attacks;deep neural networks},
+  doi={10.1109/TPS-ISA50397.2020.00042}}
+
+@inproceedings{RPAttack,
+  author={Huang, Hao and Wang, Yongtao and Chen, Zhaoyu and Tang, Zhi and Zhang, Wenqiang and Ma, Kai-Kuang},
+  booktitle={2021 IEEE International Conference on Multimedia and Expo (ICME)}, 
+  title={{RPAttack}: Refined Patch Attack on General Object Detectors}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Training;Deep learning;Perturbation methods;Conferences;Refining;Detectors;Adversarial Examples;General Object Detector;Patch Selection and Refining},
+  doi={10.1109/ICME51207.2021.9428443}}
+
+@article{DPAttack,
+  author       = {Shudeng Wu and
+                  Tao Dai and
+                  Shu{-}Tao Xia},
+  title        = {{DPAttack}: {Diffused} Patch Attacks against Universal Object Detection},
+  journal      = {CoRR},
+  volume       = {abs/2010.11679},
+  year         = {2020},
+  url          = {https://arxiv.org/abs/2010.11679},
+  eprinttype    = {arXiv},
+  eprint       = {2010.11679},
+  timestamp    = {Mon, 04 Sep 2023 07:51:08 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-2010-11679.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@InProceedings{ZQA,
+    author    = {Cai, Zikui and Rane, Shantanu and Brito, Alejandro E. and Song, Chengyu and Krishnamurthy, Srikanth V. and Roy-Chowdhury, Amit K. and Asif, M. Salman},
+    title     = {Zero-Query Transfer Attacks on Context-Aware Object Detectors},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {15024-15034}
+}
+
+@article{PatchFP,
+title = {Adversarial patch-based false positive creation attacks against aerial imagery object detectors},
+journal = {Neurocomputing},
+volume = {579},
+pages = {127431},
+year = {2024},
+issn = {0925-2312},
+doi = {https://doi.org/10.1016/j.neucom.2024.127431},
+url = {https://www.sciencedirect.com/science/article/pii/S0925231224002029},
+author = {Guijian Tang and Wen Yao and Tingsong Jiang and Yong Zhao and Jialiang Sun},
+keywords = {Adversarial patch, Aerial imagery, Object detection, False positive creation attacks},
+abstract = {Although adversarial attacks have revealed weaknesses in Deep Neural Networks (DNNs)-based aerial detectors, they present a new paradigm for concealing vulnerable assets from autonomous detection systems onboard satellites. Among them, adversarial patches were widely applied due to their physical realizability. Nonetheless, most existing adversarial patch-based attack methods are developed to hide objects from detectors to achieve a vanishing attack. This paper proposes a novel Adversarial Patch False Positive Creation Attack (APFP-CA) framework that enables aerial detectors to recognize non-existent objects, thereby realizing a creation attack. Concretely, the APFP-CA models the creation attack as a two-stage optimization problem. The first stage uses a well-designed efficient loss function to increase the objectness score of patches placed anywhere in the scene to achieve untargeted attacks. The second stage involves elaborating two category-dependent loss functions for fulfilling targeted attacks. Experiments conducted on diverse datasets and detectors demonstrate the effectiveness and universality of our method. Transfer attacks across different datasets and models validate the generalizability of the optimized adversarial patches. Finally, we perform several proportionally scaled experiments physically to illustrate that the optimized adversarial patches can successfully deceive aerial detectors in the physical world. The proposed approach offers a novel contribution to adversarial attacks against aerial imagery objectors and holds potential for practical applications in high-security systems.}
+}
+
+@ARTICLE{Daedalus,
+  author={Wang, Derui and Li, Chaoran and Wen, Sheng and Han, Qing-Long and Nepal, Surya and Zhang, Xiangyu and Xiang, Yang},
+  journal={IEEE Transactions on Cybernetics}, 
+  title={Daedalus: {Breaking} Nonmaximum Suppression in Object Detection via Adversarial Examples}, 
+  year={2022},
+  volume={52},
+  number={8},
+  pages={7427-7440},
+  keywords={Task analysis;Perturbation methods;Biological system modeling;Load modeling;Feature extraction;Computational modeling;Object detection;Adversarial example;cybersecurity;object detection (OD)},
+  doi={10.1109/TCYB.2020.3041481}}
+
+@article{Evaporate,
+title = {An adversarial attack on {DNN-based} black-box object detectors},
+journal = {Journal of Network and Computer Applications},
+volume = {161},
+pages = {102634},
+year = {2020},
+issn = {1084-8045},
+doi = {https://doi.org/10.1016/j.jnca.2020.102634},
+url = {https://www.sciencedirect.com/science/article/pii/S1084804520301089},
+author = {Yajie Wang and Yu-an Tan and Wenjiao Zhang and Yuhang Zhao and Xiaohui Kuang},
+keywords = {Adversarial example, Black-box attack, Object detector, Deep neural network},
+abstract = {Object detection models play an essential role in various IoT devices as one of the core components. Scientific experiments have proven that object detection models are vulnerable to adversarial examples. Heretofore, some attack methods against object detection models have been proposed, but the existing attack methods can only attack white-box models or a specific type of black-box models. In this paper, we propose a novel black-box attack method called Evaporate Attack, which can successfully attack both regression-based and region-based detection models. To perform an effective attack on different types of object detection models, we design an optimization algorithm, which can generate adversarial examples only utilizes the position and label information of the model's prediction. Evaporate Attack can hide objects from detection models without any interior information of the model. This scenario is much practical in real-world faced by the attacker. Our approach achieves an 84% fooling rate on regression-based YOLOv3 and a 48% fooling rate on region-based Faster R–CNN, under the premise that all objects are hidden.}
+}
+
+@article{Pick-Object,
+title = {{Pick-Object-Attack}: Type-specific adversarial attack for object detection},
+journal = {Computer Vision and Image Understanding},
+volume = {211},
+pages = {103257},
+year = {2021},
+issn = {1077-3142},
+doi = {https://doi.org/10.1016/j.cviu.2021.103257},
+url = {https://www.sciencedirect.com/science/article/pii/S1077314221001016},
+author = {Omid {Mohamad Nezami} and Akshay Chaturvedi and Mark Dras and Utpal Garain},
+keywords = {Adversarial attack, Faster R-CNN, Deep learning, Image captioning, Computer vision},
+abstract = {Many recent studies have shown that deep neural models are vulnerable to adversarial samples: images with imperceptible perturbations, for example, can fool image classifiers. In this paper, we present the first type-specific approach to generating adversarial examples for object detection, which entails detecting bounding boxes around multiple objects present in the image and classifying them at the same time, making it a harder task than against image classification. We specifically aim to attack the widely used Faster R-CNN by changing the predicted label for a particular object in an image: where prior work has targeted one specific object (a stop sign), we generalize to arbitrary objects, with the key challenge being the need to change the labels of all bounding boxes for all instances of that object type. To do so, we propose a novel method, named Pick-Object-Attack. Pick-Object-Attack successfully adds perturbations only to bounding boxes for the targeted object, preserving the labels of other detected objects in the image. In terms of perceptibility, the perturbations induced by the method are very small. Furthermore, for the first time, we examine the effect of adversarial attacks on object detection in terms of a downstream task, image captioning; we show that where a method that can modify all object types leads to very obvious changes in captions, the changes from our constrained attack are much less apparent.}
+}
+
+@article{RAD,
+title = {Relevance attack on detectors},
+journal = {Pattern Recognition},
+volume = {124},
+pages = {108491},
+year = {2022},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2021.108491},
+url = {https://www.sciencedirect.com/science/article/pii/S0031320321006671},
+author = {Sizhe Chen and Fan He and Xiaolin Huang and Kun Zhang},
+keywords = {Adversarial attack, Attack transferability, Black-box attack, Relevance map, Interpreters, Object detection},
+abstract = {This paper focuses on high-transferable adversarial attacks on detectors, which are hard to attack in a black-box manner, because of their multiple-output characteristics and the diversity across architectures. To pursue a high attack transferability, one plausible way is to find a common property across detectors, which facilitates the discovery of common weaknesses. We are the first to suggest that the relevance map from interpreters for detectors is such a property. Based on it, we design a Relevance Attack on Detectors (RAD), which achieves a state-of-the-art transferability, exceeding existing results by above 20%. On MS COCO, the detection mAPs for all 8 black-box architectures are more than halved and the segmentation mAPs are also significantly influenced. Given the great transferability of RAD, we generate the first adversarial dataset for object detection and instance segmentation, i.e., Adversarial Objects in COntext (AOCO), which helps to quickly evaluate and improve the robustness of detectors.}
+}
+
+@INPROCEEDINGS{CAP,
+  author={Zhang, Hantao and Zhou, Wengang and Li, Houqiang},
+  booktitle={2020 IEEE International Conference on Multimedia and Expo (ICME)}, 
+  title={Contextual Adversarial Attacks For Object Detection}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Proposals;Detectors;Object detection;Perturbation methods;Head;Machine learning;Measurement;Adversarial attack;contextual information;object detection;weakly supervised object detection},
+  doi={10.1109/ICME46284.2020.9102805}}
+
+@article{UEA,
+  author       = {Xingxing Wei and
+                  Siyuan Liang and
+                  Xiaochun Cao and
+                  Jun Zhu},
+  title        = {Transferable Adversarial Attacks for Image and Video Object Detection},
+  journal      = {CoRR},
+  volume       = {abs/1811.12641},
+  year         = {2018},
+  url          = {http://arxiv.org/abs/1811.12641},
+  eprinttype    = {arXiv},
+  eprint       = {1811.12641},
+  timestamp    = {Sat, 23 Jan 2021 01:11:03 +0100},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-1811-12641.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{R-AP,
+  author       = {Yuezun Li and
+                  Daniel Tian and
+                  Ming{-}Ching Chang and
+                  Xiao Bian and
+                  Siwei Lyu},
+  title        = {Robust Adversarial Perturbation on Deep Proposal-based Models},
+  journal      = {CoRR},
+  volume       = {abs/1809.05962},
+  year         = {2018},
+  url          = {http://arxiv.org/abs/1809.05962},
+  eprinttype    = {arXiv},
+  eprint       = {1809.05962},
+  timestamp    = {Fri, 05 Oct 2018 11:34:52 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-1809-05962.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@InProceedings{DAG,
+author = {Xie, Cihang and Wang, Jianyu and Zhang, Zhishuai and Zhou, Yuyin and Xie, Lingxi and Yuille, Alan},
+title = {Adversarial Examples for Semantic Segmentation and Object Detection},
+booktitle = {Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
+month = {Oct},
+year = {2017}
+}
+
+@article{DPatch,
+  author       = {Xin Liu and
+                  Huanrui Yang and
+                  Linghao Song and
+                  Hai Li and
+                  Yiran Chen},
+  title        = {{DPatch}: {Attacking} Object Detectors with Adversarial Patches},
+  journal      = {CoRR},
+  volume       = {abs/1806.02299},
+  year         = {2018},
+  url          = {http://arxiv.org/abs/1806.02299},
+  eprinttype    = {arXiv},
+  eprint       = {1806.02299},
+  timestamp    = {Fri, 05 Aug 2022 08:59:46 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-1806-02299.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@InProceedings{PRFA,
+    author    = {Liang, Siyuan and Wu, Baoyuan and Fan, Yanbo and Wei, Xingxing and Cao, Xiaochun},
+    title     = {Parallel Rectangle Flip Attack: {A} Query-Based Black-Box Attack Against Object Detection},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2021},
+    pages     = {7697-7707}
+}
+
+@inproceedings{AdvART,
+  title={{AdvART}: {Adversarial} art for camouflaged object detection attacks},
+  author={Guesmi, Amira and Bilasco, Ioan Marius and Shafique, Muhammad and Alouani, Ihsen},
+  booktitle={2024 IEEE International Conference on Image Processing (ICIP)},
+  pages={666--672},
+  year={2024},
+  organization={IEEE}
+}
+
+@INPROCEEDINGS{InvCloak,
+  author={Yang, Darren Yu and Xiong, Jay and Li, Xincheng and Yan, Xu and Raiti, John and Wang, Yuntao and Wu, HuaQiang and Zhong, Zhenyu},
+  booktitle={2018 9th IEEE Annual Ubiquitous Computing, Electronics \& Mobile Communication Conference (UEMCON)}, 
+  title={Building Towards "{Invisible Cloak}": {Robust} Physical Adversarial Attack on {YOLO} Object Detector}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={368-374},
+  keywords={Artificial Intelligence;Security;Neural network;Adversarial Example;Physical Attack;Object Detector},
+  doi={10.1109/UEMCON.2018.8796670}}
+
+@article{ImpBackPatches,
+  author       = {Yuezun Li and
+                  Xian Bian and
+                  Siwei Lyu},
+  title        = {Attacking Object Detectors via Imperceptible Patches on Background},
+  journal      = {CoRR},
+  volume       = {abs/1809.05966},
+  year         = {2018},
+  url          = {http://arxiv.org/abs/1809.05966},
+  eprinttype    = {arXiv},
+  eprint       = {1809.05966},
+  timestamp    = {Fri, 05 Oct 2018 11:34:52 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-1809-05966.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@InProceedings{PatchesPerson,
+author = {Thys, Simen and Van Ranst, Wiebe and Goedeme, Toon},
+title = {Fooling Automated Surveillance Cameras: {Adversarial} Patches to Attack Person Detection},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+month = {June},
+year = {2019}
+}
+
+@article{U-DOS,
+title = {Universal adversarial perturbations against object detection},
+journal = {Pattern Recognition},
+volume = {110},
+pages = {107584},
+year = {2021},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2020.107584},
+url = {https://www.sciencedirect.com/science/article/pii/S0031320320303873},
+author = {Debang Li and Junge Zhang and Kaiqi Huang},
+keywords = {Adversarial examples, Object detection, Universal adversarial perturbation},
+abstract = {Despite the remarkable success of deep neural networks on many visual tasks, they have been proved to be vulnerable to adversarial examples. For visual tasks, adversarial examples are images added with visually imperceptible perturbations that result in failure for recognition. Previous works have demonstrated that adversarial perturbations can cause neural networks to fail on object detection. But these methods focus on generating an adversarial perturbation for a specific image, which is the image-specific perturbation. This paper tries to extend such image-level adversarial perturbations to detector-level, which are universal (image-agnostic) adversarial perturbations. Motivated by this, we propose a Universal Dense Object Suppression (U-DOS) algorithm to derive the universal adversarial perturbations against object detection and show that such perturbations with visual imperceptibility can lead the state-of-the-art detectors to fail in finding any objects in most images. Compared to image-specific perturbations, the results of image-agnostic perturbations are more interesting and also pose more challenges in AI security, because they are more convenient to be applied in the real physical world. We also analyze the generalization of such universal adversarial perturbations across different detectors and datasets under the black-box attack settings, showing it’s a simple but promising adversarial attack approach against object detection. Furthermore, we validate the class-specific universal perturbations, which can remove the detection results of the target class and keep others unchanged.}
+}
+
+@InProceedings{ShapeShifter,
+author="Chen, Shang-Tse
+and Cornelius, Cory
+and Martin, Jason
+and Chau, Duen Horng (Polo)",
+editor="Berlingerio, Michele
+and Bonchi, Francesco
+and G{\"a}rtner, Thomas
+and Hurley, Neil
+and Ifrim, Georgiana",
+title="{ShapeShifter}: {Robust} Physical Adversarial Attack on {Faster R-CNN} Object Detector",
+booktitle="Machine Learning and Knowledge Discovery in Databases",
+year="2019",
+publisher="Springer International Publishing",
+address="Cham",
+pages="52--68",
+abstract="Given the ability to directly manipulate image pixels in the digital input space, an adversary can easily generate imperceptible perturbations to fool a Deep Neural Network (DNN) image classifier, as demonstrated in prior work. In this work, we propose ShapeShifter, an attack that tackles the more challenging problem of crafting physical adversarial perturbations to fool image-based object detectors like Faster R-CNN. Attacking an object detector is more difficult than attacking an image classifier, as it needs to mislead the classification results in multiple bounding boxes with different scales. Extending the digital attack to the physical world adds another layer of difficulty, because it requires the perturbation to be robust enough to survive real-world distortions due to different viewing distances and angles, lighting conditions, and camera limitations. We show that the Expectation over Transformation technique, which was originally proposed to enhance the robustness of adversarial perturbations in image classification, can be successfully adapted to the object detection setting. ShapeShifter can generate adversarially perturbed stop signs that are consistently mis-detected by Faster R-CNN as other objects, posing a potential threat to autonomous vehicles and other safety-critical computer vision systems. Code related to this paper is available at: https://github.com/shangtse/robust-physical-attack.",
+isbn="978-3-030-10925-7"
+}
+
+@INPROCEEDINGS{PatchesUAV,
+  author={Shrestha, Samridha and Pathak, Saurabh and Viegas, Eduardo K.},
+  booktitle={2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 
+  title={Towards a Robust Adversarial Patch Attack Against Unmanned Aerial Vehicles Object Detection}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={3256-3263},
+  keywords={Perturbation methods;Object detection;Detectors;Artificial neural networks;Autonomous aerial vehicles;Robustness;Safety},
+  doi={10.1109/IROS55552.2023.10342460}}
+
+@article{FirstSurvey,
+  author    = {Amirkhani, Abdollah and Karimi, Mohammad Parsa and Banitalebi-Dehkordi, Amin},
+  title     = {A survey on adversarial attacks and defenses for object detection and their applications in autonomous vehicles},
+  journal   = {The Visual Computer},
+  year      = {2023},
+  volume    = {39},
+  number    = {11},
+  pages     = {5293--5307},
+  doi       = {10.1007/s00371-022-02660-6},
+  url       = {https://doi.org/10.1007/s00371-022-02660-6},
+  issn      = {1432-2315},
+  abstract  = {Object detection is considered as one of the most important applications of deep learning. However, the object detection techniques lose their effectiveness and reliability when they fall victim to adversarial attacks. This big flaw has made it challenging to fully adopt the object detection applications in important products and essential industries such as autonomous vehicles. While the field of adversarial robustness has witnessed a great deal of achievement in building sophisticated methods of attack and defense, the majority of the work has been focused on the task of image classification due to its simplicity in theory and practice. In this paper, we provide an up-to-date survey of recent advancements in the field of adversarial robustness for object detection. We review the prominent attack and defense mechanisms presented in the research community and provide discussions and insights on their strengths and weaknesses. In addition, we review the recent literature on adversarial robustness for applications related to autonomous vehicles, as a critical aspect of this high-impact emerging industry, in which the robustness of models is of vital importance.}
+}
+
+@article{SecondSurvey,
+title = {Adversarial examples based on object detection tasks: {A} survey},
+journal = {Neurocomputing},
+volume = {519},
+pages = {114-126},
+year = {2023},
+issn = {0925-2312},
+doi = {https://doi.org/10.1016/j.neucom.2022.10.046},
+url = {https://www.sciencedirect.com/science/article/pii/S0925231222013273},
+author = {Jian-Xun Mi and Xu-Dong Wang and Li-Fang Zhou and Kun Cheng},
+keywords = {Deep learning, Object detection, Adversarial examples, Perturbation, Adversarial defenses},
+abstract = {Deep learning plays a critical role in the applications of artificial intelligence. The trend of processing images or videos as input data and pursuing execution efficiency in practical applications is unstoppable. However, the vulnerability due to the complex structure of deep networks makes it at risk of attacks. Object detection, as the significant product impacted by the deep learning frame, corresponds to this weakness implicated by its multiple-tasks property. Besides, these applications involving object detection techniques are integrated deeply into our lives, potentially leading to unimaginable loss. Adversarial example attacks, as the mainstream attack method, provide an efficacious and comprehensible idea to generate perturbation. In this survey, we review the existing adversarial example attacks in object detection tasks and inductively discuss the similarity and differences among these approaches. Finally, we construct this survey for discussing the attacks in the object detection field and point out the possible direction for adversarial defenses in future studies.}
+}
+
+@misc{BestSurvey,
+      title={A Survey and Evaluation of Adversarial Attacks for Object Detection}, 
+      author={Khoi Nguyen Tiet Nguyen and Wenyu Zhang and Kangkang Lu and Yuhuan Wu and Xingjian Zheng and Hui Li Tan and Liangli Zhen},
+      year={2024},
+      eprint={2408.01934},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2408.01934}, 
+}
+
+@ARTICLE{UDF,
+  author={Yu, Youngjoon and Lee, Hong Joo and Lee, Hakmin and Ro, Yong Man},
+  journal={IEEE Transactions on Image Processing}, 
+  title={Defending Person Detection Against Adversarial Patch Attack by Using Universal Defensive Frame}, 
+  year={2022},
+  volume={31},
+  number={},
+  pages={6976-6990},
+  keywords={Detectors;Task analysis;Optimization;Robustness;Training;Security;Head;Adversarial patch;defensive pattern;universal defensive frame;competitive learning;person detection},
+  doi={10.1109/TIP.2022.3217375}}
+
+@InProceedings{ContAdvPatches,
+author = {Saha, Aniruddha and Subramanya, Akshayvarun and Patil, Koninika and Pirsiavash, Hamed},
+title = {Role of Spatial Context in Adversarial Robustness for Object Detection},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+month = {June},
+year = {2020}
+}
+
+@InProceedings{SAC,
+    author    = {Liu, Jiang and Levine, Alexander and Lau, Chun Pong and Chellappa, Rama and Feizi, Soheil},
+    title     = {{Segment and Complete}: {Defending Object} Detectors Against Adversarial Patch Attacks With Robust Patch Detection},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {14973-14982}
+}
+
+@inproceedings{AdvPatchFeatEnergy,
+title = "Defending Physical Adversarial Attack on Object Detection via Adversarial Patch-Feature Energy",
+abstract = "Object detection plays an important role in security-critical systems such as autonomous vehicles but has shown to be vulnerable to adversarial patch attacks. Existing defense methods are restricted to localized noise patches by removing noisy regions in the input image. However, adversarial patches have developed into natural-looking patterns which evade existing defenses. To address this issue, we propose a defense method based on a novel concept Adversarial Patch- Feature Energy(APE) which exploits common deep feature characteristics of an adversarial patch. Our proposed defense consists of APE-masking and APE-refinement which can be employed to defend against any adversarial patch on literature. Extensive experiments demonstrate that APE-based defense achieves impressive robustness against adversarial patches both in the digital space and the physical world.",
+keywords = "adversarial patch defense, adversarial patch-feature energy, object detection, physical attack",
+author = "Taeheon Kim and Youngjoon Yu and Ro, {Yong Man}",
+note = "Publisher Copyright: {\textcopyright} 2022 ACM.; 30th ACM International Conference on Multimedia, MM 2022 ; Conference date: 10-10-2022 Through 14-10-2022",
+year = "2022",
+month = oct,
+day = "10",
+doi = "10.1145/3503161.3548362",
+language = "English",
+series = "MM 2022 - Proceedings of the 30th ACM International Conference on Multimedia",
+publisher = "Association for Computing Machinery, Inc",
+pages = "1905--1913",
+booktitle = "MM 2022 - Proceedings of the 30th ACM International Conference on Multimedia",
+}
+
+@inproceedings{AdvPixelMasking,
+  author    = {Ping-Han Chiang and Chi-Shen Chan and Shan-Hung Wu},
+  title     = {{Adversarial Pixel Masking}: {A} Defense against Physical Attacks for Pre-trained Object Detectors},
+  booktitle = {Proceedings of the 29th ACM International Conference on Multimedia (MM '21)},
+  pages     = {1856--1865},
+  year      = {2021},
+  publisher = {ACM},
+  doi       = {10.1145/3474085.3475338},
+  url       = {https://doi.org/10.1145/3474085.3475338}
+}
+
+@Article{AnomalyLoc,
+AUTHOR = {Ilina, Olga and Tereshonok, Maxim and Ziyadinov, Vadim},
+TITLE = {Increasing Neural-Based Pedestrian Detectors’ Robustness to Adversarial Patch Attacks Using Anomaly Localization},
+JOURNAL = {Journal of Imaging},
+VOLUME = {11},
+YEAR = {2025},
+NUMBER = {1},
+ARTICLE-NUMBER = {26},
+URL = {https://www.mdpi.com/2313-433X/11/1/26},
+PubMedID = {39852339},
+ISSN = {2313-433X},
+ABSTRACT = {Object detection in images is a fundamental component of many safety-critical systems, such as autonomous driving, video surveillance systems, and robotics. Adversarial patch attacks, being easily implemented in the real world, provide effective counteraction to object detection by state-of-the-art neural-based detectors. It poses a serious danger in various fields of activity. Existing defense methods against patch attacks are insufficiently effective, which underlines the need to develop new reliable solutions. In this manuscript, we propose a method which helps to increase the robustness of neural network systems to the input adversarial images. The proposed method consists of a Deep Convolutional Neural Network to reconstruct a benign image from the adversarial one; a Calculating Maximum Error block to highlight the mismatches between input and reconstructed images; a Localizing Anomalous Fragments block to extract the anomalous regions using the Isolation Forest algorithm from histograms of images’ fragments; and a Clustering and Processing block to group and evaluate the extracted anomalous regions. The proposed method, based on anomaly localization, demonstrates high resistance to adversarial patch attacks while maintaining the high quality of object detection. The experimental results show that the proposed method is effective in defending against adversarial patch attacks. Using the YOLOv3 algorithm with the proposed defensive method for pedestrian detection in the INRIAPerson dataset under the adversarial attacks, the mAP50 metric reaches 80.97% compared to 46.79% without a defensive method. The results of the research demonstrate that the proposed method is promising for improvement of object detection systems security.},
+DOI = {10.3390/jimaging11010026}
+}
+
+@inproceedings{SeeingisntBelieving,
+  author    = {Yue Zhao and Hong Zhu and Ruigang Liang and Qintao Shen and Shengzhi Zhang and Kai Chen},
+  title     = {{Seeing isn't Believing}: {Towards} More Robust Adversarial Attack Against Real World Object Detectors},
+  booktitle = {Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security (CCS '19)},
+  pages     = {1989--2004},
+  year      = {2019},
+  publisher = {ACM},
+  doi       = {10.1145/3319535.3354259},
+  url       = {https://doi.org/10.1145/3319535.3354259}
+}
+
+@inproceedings{ContextInconsistency,
+  title={Connecting the dots: {Detecting} adversarial perturbations using context inconsistency},
+  author={Li, Shasha and Zhu, Shitong and Paul, Sudipta and Roy-Chowdhury, Amit and Song, Chengyu and Krishnamurthy, Srikanth and Swami, Ananthram and Chan, Kevin S},
+  booktitle={Computer Vision--ECCV 2020: 16th European Conference, Glasgow, UK, August 23--28, 2020, Proceedings, Part XXIII 16},
+  pages={396--413},
+  year={2020},
+  organization={Springer}
+}
+
+@ARTICLE{ClassifSurvey,
+  author={Costa, Joana C. and Roxo, Tiago and Proença, Hugo and Inácio, Pedro Ricardo Morais},
+  journal={IEEE Access}, 
+  title={How Deep Learning Sees the World: {A} Survey on Adversarial Attacks \& Defenses}, 
+  year={2024},
+  volume={12},
+  number={},
+  pages={61113-61136},
+  keywords={Surveys;Transformers;Perturbation methods;Object recognition;Deep learning;Closed box;Vectors;Adversarial attacks;adversarial defenses;datasets;evaluation metrics;review;vision transformers},
+  doi={10.1109/ACCESS.2024.3395118}}
+
+@article{ClassifSurveyCAAI,
+author = {Chakraborty, Anirban and Alam, Manaar and Dey, Vishal and Chattopadhyay, Anupam and Mukhopadhyay, Debdeep},
+title = {A survey on adversarial attacks and defences},
+journal = {CAAI Transactions on Intelligence Technology},
+volume = {6},
+number = {1},
+pages = {25-45},
+keywords = {security of data, deep learning (artificial intelligence)},
+doi = {https://doi.org/10.1049/cit2.12028},
+url = {https://ietresearch.onlinelibrary.wiley.com/doi/abs/10.1049/cit2.12028},
+eprint = {https://ietresearch.onlinelibrary.wiley.com/doi/pdf/10.1049/cit2.12028},
+abstract = {Abstract Deep learning has evolved as a strong and efficient framework that can be applied to a broad spectrum of complex learning problems which were difficult to solve using the traditional machine learning techniques in the past. The advancement of deep learning has been so radical that today it can surpass human-level performance. As a consequence, deep learning is being extensively used in most of the recent day-to-day applications. However, efficient deep learning systems can be jeopardised by using crafted adversarial samples, which may be imperceptible to the human eye, but can lead the model to misclassify the output. In recent times, different types of adversaries based on their threat model leverage these vulnerabilities to compromise a deep learning system where adversaries have high incentives. Hence, it is extremely important to provide robustness to deep learning algorithms against these adversaries. However, there are only a few strong countermeasures which can be used in all types of attack scenarios to design a robust deep learning system. Herein, the authors attempt to provide a detailed discussion on different types of adversarial attacks with various threat models and also elaborate on the efficiency and challenges of recent countermeasures against them.},
+year = {2021}
+}
+
+@ARTICLE{ClassifSurveyDefense,
+  author={Miller, David J. and Xiang, Zhen and Kesidis, George},
+  journal={Proceedings of the IEEE}, 
+  title={Adversarial Learning Targeting Deep Neural Network Classification: A Comprehensive Review of Defenses Against Attacks}, 
+  year={2020},
+  volume={108},
+  number={3},
+  pages={402-433},
+  keywords={Training data;Neural networks;Reverse engineering;Machine learning;Robustness;Training data;Feature extraction;Social networking (online);Informatics;Adversarial machine learning;Anomaly detection (AD);backdoor;black box;data poisoning (DP);deep neural networks (DNNs);membership inference attack;reverse engineering (RE);robust classification;targeted attacks;test-time-evasion (TTE);transferability;white box},
+  doi={10.1109/JPROC.2020.2970615}}
+
+@InProceedings{ReID,
+author = {Bouniot, Quentin and Audigier, Romaric and Loesch, Angelique},
+title = {Vulnerability of Person Re-Identification Models to Metric Adversarial Attacks},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+month = {June},
+year = {2020}
+}
+
+@InProceedings{UPC,
+author = {Huang, Lifeng and Gao, Chengying and Zhou, Yuyin and Xie, Cihang and Yuille, Alan L. and Zou, Changqing and Liu, Ning},
+title = {Universal Physical Camouflage Attacks on Object Detectors},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
+}
+
+@inproceedings{AdvTshirt,
+  title={Adversarial {T-shirt}! {Evading} person detectors in a physical world},
+  author={Xu, Kaidi and Zhang, Gaoyuan and Liu, Sijia and Fan, Quanfu and Sun, Mengshu and Chen, Hongge and Chen, Pin-Yu and Wang, Yanzhi and Lin, Xue},
+  booktitle={Computer vision--ECCV 2020: 16th European conference, glasgow, UK, August 23--28, 2020, proceedings, part v 16},
+  pages={665--681},
+  year={2020},
+  organization={Springer}
+}
+
+@InProceedings{NaturalisticPatches,
+    author    = {Hu, Yu-Chih-Tuan and Kung, Bo-Han and Tan, Daniel Stanley and Chen, Jun-Cheng and Hua, Kai-Lung and Cheng, Wen-Huang},
+    title     = {Naturalistic Physical Adversarial Patch for Object Detectors},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2021},
+    pages     = {7848-7857}
+}
+
+@InProceedings{AdvTexture,
+    author    = {Hu, Zhanhao and Huang, Siyuan and Zhu, Xiaopei and Sun, Fuchun and Zhang, Bo and Hu, Xiaolin},
+    title     = {Adversarial Texture for Fooling Person Detectors in the Physical World},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {13307-13316}
+}
+
+@InProceedings{FbInvCloak,
+author="Wu, Zuxuan
+and Lim, Ser-Nam
+and Davis, Larry S.
+and Goldstein, Tom",
+editor="Vedaldi, Andrea
+and Bischof, Horst
+and Brox, Thomas
+and Frahm, Jan-Michael",
+title="Making an Invisibility Cloak: {Real} World Adversarial Attacks on Object Detectors",
+booktitle="Computer Vision -- ECCV 2020",
+year="2020",
+publisher="Springer International Publishing",
+address="Cham",
+pages="1--17",
+abstract="We present a systematic study of the transferability of adversarial attacks on state-of-the-art object detection frameworks. Using standard detection datasets, we train patterns that suppress the objectness scores produced by a range of commonly used detectors, and ensembles of detectors. Through extensive experiments, we benchmark the effectiveness of adversarially trained patches under both white-box and black-box settings, and quantify transferability of attacks between datasets, object classes, and detector models. Finally, we present a detailed study of physical world attacks using printed posters and wearable clothes, and rigorously quantify the performance of such attacks with different metrics.",
+isbn="978-3-030-58548-8"
+}
+
+@inproceedings{LPIPS,
+  title={The Unreasonable Effectiveness of Deep Features as a Perceptual Metric},
+  author={Zhang, Richard and Isola, Phillip and Efros, Alexei A and Shechtman, Eli and Wang, Oliver},
+  booktitle={CVPR},
+  year={2018}
+}
+
+@article{mmdetection,
+  title   = {{MMDetection}: {Open MMLab} Detection Toolbox and Benchmark},
+  author  = {Chen, Kai and Wang, Jiaqi and Pang, Jiangmiao and Cao, Yuhang and
+             Xiong, Yu and Li, Xiaoxiao and Sun, Shuyang and Feng, Wansen and
+             Liu, Ziwei and Xu, Jiarui and Zhang, Zheng and Cheng, Dazhi and
+             Zhu, Chenchen and Cheng, Tianheng and Zhao, Qijie and Li, Buyu and
+             Lu, Xin and Zhu, Rui and Wu, Yue and Dai, Jifeng and Wang, Jingdong
+             and Shi, Jianping and Ouyang, Wanli and Loy, Chen Change and Lin, Dahua},
+  journal= {arXiv preprint arXiv:1906.07155},
+  year={2019}
+}
+
+@InProceedings{COCO,
+author="Lin, Tsung-Yi
+and Maire, Michael
+and Belongie, Serge
+and Hays, James
+and Perona, Pietro
+and Ramanan, Deva
+and Doll{\'a}r, Piotr
+and Zitnick, C. Lawrence",
+editor="Fleet, David
+and Pajdla, Tomas
+and Schiele, Bernt
+and Tuytelaars, Tinne",
+title="Microsoft {COCO}: {Common} Objects in Context",
+booktitle="Computer Vision -- ECCV 2014",
+year="2014",
+publisher="Springer International Publishing",
+address="Cham",
+pages="740--755",
+abstract="We present a new dataset with the goal of advancing the state-of-the-art in object recognition by placing the question of object recognition in the context of the broader question of scene understanding. This is achieved by gathering images of complex everyday scenes containing common objects in their natural context. Objects are labeled using per-instance segmentations to aid in precise object localization. Our dataset contains photos of 91 objects types that would be easily recognizable by a 4 year old. With a total of 2.5 million labeled instances in 328k images, the creation of our dataset drew upon extensive crowd worker involvement via novel user interfaces for category detection, instance spotting and instance segmentation. We present a detailed statistical analysis of the dataset in comparison to PASCAL, ImageNet, and SUN. Finally, we provide baseline performance analysis for bounding box and segmentation detection results using a Deformable Parts Model.",
+isbn="978-3-319-10602-1"
+}
+
+@article{VOC2007,
+  author    = {Mark Everingham and Luc Van Gool and Christopher K. I. Williams and John Winn and Andrew Zisserman},
+  title     = {The {Pascal Visual Object Classes} ({VOC}) Challenge},
+  journal   = {International Journal of Computer Vision},
+  year      = {2010},
+  volume    = {88},
+  number    = {2},
+  pages     = {303--338},
+  doi       = {10.1007/s11263-009-0275-4},
+  url       = {https://doi.org/10.1007/s11263-009-0275-4},
+  issn      = {1573-1405},
+  abstract  = {The Pascal Visual Object Classes (VOC) challenge is a benchmark in visual object category recognition and detection, providing the vision and machine learning communities with a standard dataset of images and annotation, and standard evaluation procedures. Organised annually from 2005 to present, the challenge and its associated dataset has become accepted as the benchmark for object detection.}
+}
+
+@inproceedings{yolov3,
+  title={Yolov3: An incremental improvement},
+  author={Farhadi, Ali and Redmon, Joseph},
+  booktitle={Computer vision and pattern recognition},
+  volume={1804},
+  pages={1--6},
+  year={2018},
+  organization={Springer Berlin/Heidelberg, Germany}
+}
+
+@InProceedings{resnet,
+author = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+title = {Deep Residual Learning for Image Recognition},
+booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2016}
+}
+
+@InProceedings{DETR,
+author="Carion, Nicolas
+and Massa, Francisco
+and Synnaeve, Gabriel
+and Usunier, Nicolas
+and Kirillov, Alexander
+and Zagoruyko, Sergey",
+editor="Vedaldi, Andrea
+and Bischof, Horst
+and Brox, Thomas
+and Frahm, Jan-Michael",
+title="End-to-End Object Detection with Transformers",
+booktitle="Computer Vision -- ECCV 2020",
+year="2020",
+publisher="Springer International Publishing",
+address="Cham",
+pages="213--229",
+abstract="We present a new method that views object detection as a direct set prediction problem. Our approach streamlines the detection pipeline, effectively removing the need for many hand-designed components like a non-maximum suppression procedure or anchor generation that explicitly encode our prior knowledge about the task. The main ingredients of the new framework, called DEtection TRansformer or DETR, are a set-based global loss that forces unique predictions via bipartite matching, and a transformer encoder-decoder architecture. Given a fixed small set of learned object queries, DETR reasons about the relations of the objects and the global image context to directly output the final set of predictions in parallel. The new model is conceptually simple and does not require a specialized library, unlike many other modern detectors. DETR demonstrates accuracy and run-time performance on par with the well-established and highly-optimized Faster R-CNN baseline on the challenging COCO object detection dataset. Moreover, DETR can be easily generalized to produce panoptic segmentation in a unified manner. We show that it significantly outperforms competitive baselines. Training code and pretrained models are available at https://github.com/facebookresearch/detr.",
+isbn="978-3-030-58452-8"
+}
+
+
+
+@InProceedings{bdd100k,
+author = {Yu, Fisher and Chen, Haofeng and Wang, Xin and Xian, Wenqi and Chen, Yingying and Liu, Fangchen and Madhavan, Vashisht and Darrell, Trevor},
+title = {{BDD100K}: A Diverse Driving Dataset for Heterogeneous Multitask Learning},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
+}
+
+@InProceedings{Cityscapes,
+author = {Cordts, Marius and Omran, Mohamed and Ramos, Sebastian and Rehfeld, Timo and Enzweiler, Markus and Benenson, Rodrigo and Franke, Uwe and Roth, Stefan and Schiele, Bernt},
+title = {The {Cityscapes} Dataset for Semantic Urban Scene Understanding},
+booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2016}
+}
+
+
+@InProceedings{TRADES,
+  title = 	 {Theoretically Principled Trade-off between Robustness and Accuracy},
+  author =       {Zhang, Hongyang and Yu, Yaodong and Jiao, Jiantao and Xing, Eric and Ghaoui, Laurent El and Jordan, Michael},
+  booktitle = 	 {Proceedings of the 36th International Conference on Machine Learning},
+  pages = 	 {7472--7482},
+  year = 	 {2019},
+  editor = 	 {Chaudhuri, Kamalika and Salakhutdinov, Ruslan},
+  volume = 	 {97},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {09--15 Jun},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v97/zhang19p/zhang19p.pdf},
+  url = 	 {https://proceedings.mlr.press/v97/zhang19p.html},
+  abstract = 	 {We identify a trade-off between robustness and accuracy that serves as a guiding principle in the design of defenses against adversarial examples. Although this problem has been widely studied empirically, much remains unknown concerning the theory underlying this trade-off. In this work, we decompose the prediction error for adversarial examples (robust error) as the sum of the natural (classification) error and boundary error, and provide a differentiable upper bound using the theory of classification-calibrated loss, which is shown to be the tightest possible upper bound uniform over all probability distributions and measurable predictors. Inspired by our theoretical analysis, we also design a new defense method, TRADES, to trade adversarial robustness off against accuracy. Our proposed algorithm performs well experimentally in real-world datasets. The methodology is the foundation of our entry to the NeurIPS 2018 Adversarial Vision Challenge in which we won the 1st place out of &nbsp;2,000 submissions, surpassing the runner-up approach by 11.41% in terms of mean L_2 perturbation distance.}
+}
+
+@misc{antifakepromptprompt,
+      title={{AntifakePrompt}: {Prompt-Tuned} Vision-Language Models are Fake Image Detectors}, 
+      author={You-Ming Chang and Chen Yeh and Wei-Chen Chiu and Ning Yu},
+      year={2024},
+      eprint={2310.17419},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2310.17419}, 
+}
+
+@misc{goodfellow,
+      title={Explaining and Harnessing Adversarial Examples}, 
+      author={Ian J. Goodfellow and Jonathon Shlens and Christian Szegedy},
+      year={2015},
+      eprint={1412.6572},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML},
+      url={https://arxiv.org/abs/1412.6572}, 
+}
+
+@Article{maploccode,
+AUTHOR = {Padilla, Rafael and Passos, Wesley L. and Dias, Thadeu L. B. and Netto, Sergio L. and da Silva, Eduardo A. B.},
+TITLE = {A Comparative Analysis of Object Detection Metrics with a Companion Open-Source Toolkit},
+JOURNAL = {Electronics},
+VOLUME = {10},
+YEAR = {2021},
+NUMBER = {3},
+ARTICLE-NUMBER = {279},
+URL = {https://www.mdpi.com/2079-9292/10/3/279},
+ISSN = {2079-9292},
+DOI = {10.3390/electronics10030279}
+}
+
+@misc{Yolov4,
+      title={{YOLOv4}: {Optimal} Speed and Accuracy of Object Detection}, 
+      author={Alexey Bochkovskiy and Chien-Yao Wang and Hong-Yuan Mark Liao},
+      year={2020},
+      eprint={2004.10934},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2004.10934}, 
+}
+
+@inproceedings{SSD,
+  title = {{{SSD}}: {{Single}} Shot {{MultiBox}} Detector},
+  booktitle = {Computer Vision -- {{ECCV}} 2016},
+  author = {Liu, Wei and Anguelov, Dragomir and Erhan, Dumitru and Szegedy, Christian and Reed, Scott and Fu, Cheng-Yang and Berg, Alexander C.},
+  editor = {Leibe, Bastian and Matas, Jiri and Sebe, Nicu and Welling, Max},
+  year = {2016},
+  pages = {21--37},
+  publisher = {Springer International Publishing},
+  address = {Cham},
+  abstract = {We present a method for detecting objects in images using a single deep neural network. Our approach, named SSD, discretizes the output space of bounding boxes into a set of default boxes over different aspect ratios and scales per feature map location. At prediction time, the network generates scores for the presence of each object category in each default box and produces adjustments to the box to better match the object shape. Additionally, the network combines predictions from multiple feature maps with different resolutions to naturally handle objects of various sizes. SSD is simple relative to methods that require object proposals because it completely eliminates proposal generation and subsequent pixel or feature resampling stages and encapsulates all computation in a single network. This makes SSD easy to train and straightforward to integrate into systems that require a detection component. Experimental results on the PASCAL VOC, COCO, and ILSVRC datasets confirm that SSD has competitive accuracy to methods that utilize an additional object proposal step and is much faster, while providing a unified framework for both training and inference. For \$\$300 {\textbackslash}times 300\$\$300{\texttimes}300input, SSD achieves 74.3 \% mAP on VOC2007 test at 59 FPS on a Nvidia Titan X and for \$\$512 {\textbackslash}times 512\$\$512{\texttimes}512input, SSD achieves 76.9 \% mAP, outperforming a comparable state of the art Faster R-CNN model. Compared to other single stage methods, SSD has much better accuracy even with a smaller input image size. Code is available at https://github.com/weiliu89/caffe/tree/ssd.},
+  isbn = {978-3-319-46448-0}
+}
+
+@InProceedings{RetinaNet,
+author = {Lin, Tsung-Yi and Goyal, Priya and Girshick, Ross and He, Kaiming and Dollar, Piotr},
+title = {Focal Loss for Dense Object Detection},
+booktitle = {Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
+month = {Oct},
+year = {2017}
+}
+
+@InProceedings{Fcos,
+author = {Tian, Zhi and Shen, Chunhua and Chen, Hao and He, Tong},
+title = {{FCOS}: {Fully} Convolutional One-Stage Object Detection},
+booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+month = {October},
+year = {2019}
+}
+
+@InProceedings{CenterNet,
+author = {Duan, Kaiwen and Bai, Song and Xie, Lingxi and Qi, Honggang and Huang, Qingming and Tian, Qi},
+title = {{CenterNet}: {Keypoint} Triplets for Object Detection},
+booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+month = {October},
+year = {2019}
+}
+
+@misc{YOLOX,
+      title={{YOLOX}: {Exceeding YOLO} Series in 2021}, 
+      author={Zheng Ge and Songtao Liu and Feng Wang and Zeming Li and Jian Sun},
+      year={2021},
+      eprint={2107.08430},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2107.08430}, 
+}
+
+@misc{DeformableDETR,
+      title={Deformable {DETR}: {Deformable} Transformers for End-to-End Object Detection}, 
+      author={Xizhou Zhu and Weijie Su and Lewei Lu and Bin Li and Xiaogang Wang and Jifeng Dai},
+      year={2021},
+      eprint={2010.04159},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2010.04159}, 
+}
+
+@ARTICLE{faster-r-cnn,
+  author={Ren, Shaoqing and He, Kaiming and Girshick, Ross and Sun, Jian},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={{Faster R-CNN}: {Towards} Real-Time Object Detection with Region Proposal Networks}, 
+  year={2017},
+  volume={39},
+  number={6},
+  pages={1137-1149},
+  keywords={Proposals;Object detection;Convolutional codes;Feature extraction;Search problems;Detectors;Training;Object detection;region proposal;convolutional neural network},
+  doi={10.1109/TPAMI.2016.2577031}}
+
+@InProceedings{Cascader-cnn,
+author = {Cai, Zhaowei and Vasconcelos, Nuno},
+title = {{Cascade R-CNN}: {Delving} Into High Quality Object Detection},
+booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2018}
+}
+
+@InProceedings{Librar-cnn,
+author = {Pang, Jiangmiao and Chen, Kai and Shi, Jianping and Feng, Huajun and Ouyang, Wanli and Lin, Dahua},
+title = {{Libra R-CNN}: {Towards} Balanced Learning for Object Detection},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2019}
+}
+@InProceedings{Sparser-cnn,
+    author    = {Sun, Peize and Zhang, Rufeng and Jiang, Yi and Kong, Tao and Xu, Chenfeng and Zhan, Wei and Tomizuka, Masayoshi and Li, Lei and Yuan, Zehuan and Wang, Changhu and Luo, Ping},
+    title     = {{Sparse R-CNN}: {End}-to-End Object Detection With Learnable Proposals},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {14454-14463}
+}
+
+@InProceedings{Querydet,
+    author    = {Yang, Chenhongyi and Huang, Zehao and Wang, Naiyan},
+    title     = {{QueryDet}: {Cascaded} Sparse Query for Accelerating High-Resolution Small Object Detection},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {13668-13677}
+}
+
+@inproceedings{RobustDet,
+  title = {Adversarially-Aware Robust Object Detector},
+  booktitle = {Computer Vision -- {{ECCV}} 2022},
+  author = {Dong, Ziyi and Wei, Pengxu and Lin, Liang},
+  editor = {Avidan, Shai and Brostow, Gabriel and Ciss{\'e}, Moustapha and Farinella, Giovanni Maria and Hassner, Tal},
+  year = {2022},
+  pages = {297--313},
+  publisher = {Springer Nature Switzerland},
+  address = {Cham},
+  abstract = {Object detection, as a fundamental computer vision task, has achieved a remarkable progress with the emergence of deep neural networks. Nevertheless, few works explore the adversarial robustness of object detectors to resist adversarial attacks for practical applications in various real-world scenarios. Detectors have been greatly challenged by unnoticeable perturbation, with sharp performance drop on clean images and extremely poor performance on adversarial images. In this work, we empirically explore the model training for adversarial robustness in object detection, which greatly attributes to the conflict between learning clean images and adversarial images. To mitigate this issue, we propose a Robust Detector (RobustDet) based on adversarially-aware convolution to disentangle gradients for model learning on clean and adversarial images. RobustDet also employs the Adversarial Image Discriminator (AID) and Consistent Features with Reconstruction (CFR) to ensure a reliable robustness. Extensive experiments on PASCAL VOC and MS-COCO demonstrate that our model effectively disentangles gradients and significantly enhances the detection robustness with maintaining the detection ability on clean images. Our source code and trained models are publicly available at: https://github.com/7eu7d7/RobustDet.},
+  isbn = {978-3-031-20077-9}
+}
+
+@ARTICLE{AdvRecent,
+  author={Li, Xiao and Chen, Hang and Hu, Xiaolin},
+  journal={IEEE Transactions on Information Forensics and Security}, 
+  title={On the Importance of Backbone to the Adversarial Robustness of Object Detectors}, 
+  year={2025},
+  volume={20},
+  number={},
+  pages={2387-2398},
+  keywords={Detectors;Robustness;Training;Object detection;Security;Head;Standards;Training data;Perturbation methods;Glass box;Adversarial robustness;adversarial training;object detection},
+  doi={10.1109/TIFS.2025.3542964}}
+
+@misc{AdvMeta,
+      title={Meta Adversarial Training against Universal Patches}, 
+      author={Jan Hendrik Metzen and Nicole Finnie and Robin Hutmacher},
+      year={2021},
+      eprint={2101.11453},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2101.11453}, 
+}
+
+@inproceedings{filter,
+author = {Zhou, Ling and Liu, Qihe and Zhou, Shijie},
+title = {Preprocessing-based Adversarial Defense for Object Detection via Feature Filtration},
+year = {2024},
+isbn = {9798400709098},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3631908.3631920},
+doi = {10.1145/3631908.3631920},
+abstract = {Deep Neural Network (DNN)-based object detection achieved great success in a variety of scenarios. However, adversarial examples can cause catastrophic mistakes in DNNs. Despite the adversarial examples with human-imperceptible perturbations can completely change the predictions of the networks in the decision space, few defenses for object detection are known to date. In this paper, we proposed an end-to-end input transformation model to defend adversarial examples, which is motivated by research on feature representations under adversarial attacks. The proposed model consists of an Autoencoder (contains an encoder and a decoder) and a critic network only used in training. Both benign and adversarial examples are used as training sets for the proposed model. The critic network can force the encoder to eliminate the distribution divergence between benign and adversarial examples in the latent space, to filter out the non-robust features and adversarial perturbations. Finally, the decoder is used to reconstruct the input examples from preserved feature vectors into a clean version, which is then fed to the trained detector. Extensive experiments on the challenging PASCAL VOC dataset demonstrate that the proposed method can significantly improve the robustness of various detectors against unseen adversarial attacks, and it has better performance and lower time cost than previous works.},
+booktitle = {Proceedings of the 7th International Conference on Algorithms, Computing and Systems},
+pages = {80–87},
+numpages = {8},
+keywords = {Deep neural network, adversarial attack and defense, input transformation, object detection, robust},
+location = {Larissa, Greece},
+series = {ICACS '23}
+}
+
+@InProceedings{JEDI,
+    author    = {Tarchoun, Bilel and Ben Khalifa, Anouar and Mahjoub, Mohamed Ali and Abu-Ghazaleh, Nael and Alouani, Ihsen},
+    title     = {Jedi: {Entropy}-Based Localization and Removal of Adversarial Patches},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {4087-4095}
+}
+
+@InProceedings{PAD,
+    author    = {Jing, Lihua and Wang, Rui and Ren, Wenqi and Dong, Xin and Zou, Cong},
+    title     = {{PAD}: {Patch}-Agnostic Defense against Adversarial Patch Attacks},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {24472-24481}
+}
+
+@article{CertDet,
+  title={Detection as regression: {Certified} object detection with median smoothing},
+  author={Chiang, Ping-yeh and Curry, Michael and Abdelkader, Ahmed and Kumar, Aounon and Dickerson, John and Goldstein, Tom},
+  journal={Advances in Neural Information Processing Systems},
+  volume={33},
+  pages={1275--1286},
+  year={2020}
+}
+
+@inproceedings{detectorguard,
+  title={{DetectorGuard}: {Provably} securing object detectors against localized patch hiding attacks},
+  author={Xiang, Chong and Mittal, Prateek},
+  booktitle={Proceedings of the 2021 ACM SIGSAC conference on computer and communications security},
+  pages={3177--3196},
+  year={2021}
+}
+
+@inproceedings{objectseeker,
+  title={{ObjectSeeker}: {Certifiably} robust object detection against patch hiding attacks via patch-agnostic masking},
+  author={Xiang, Chong and Valtchanov, Alexander and Mahloujifar, Saeed and Mittal, Prateek},
+  booktitle={2023 IEEE Symposium on Security and Privacy (SP)},
+  pages={1329--1347},
+  year={2023},
+  organization={IEEE}
+}
+
+@inproceedings{TIDE,
+  title={{TIDE}: {A} general toolbox for identifying object detection errors},
+  author={Bolya, Daniel and Foley, Sean and Hays, James and Hoffman, Judy},
+  booktitle={European Conference on Computer Vision},
+  pages={558--573},
+  year={2020},
+  organization={Springer}
+}
+
+@inproceedings{diagnosing,
+  title={Diagnosing error in object detectors},
+  author={Hoiem, Derek and Chodpathumwan, Yodsawalai and Dai, Qieyun},
+  booktitle={European conference on computer vision},
+  pages={340--353},
+  year={2012},
+  organization={Springer}
+}
+
+@article{AdvDiff,
+  title={Diffusion models for adversarial purification},
+  author={Nie, Weili and Guo, Brandon and Huang, Yujia and Xiao, Chaowei and Vahdat, Arash and Anandkumar, Anima},
+  journal={arXiv preprint arXiv:2205.07460},
+  year={2022}
+}
+
+@article{dino,
+  title={{DINO}: {DETR} with improved denoising anchor boxes for end-to-end object detection},
+  author={Zhang, Hao and Li, Feng and Liu, Shilong and Zhang, Lei and Su, Hang and Zhu, Jun and Ni, Lionel M and Shum, Heung-Yeung},
+  journal={arXiv preprint arXiv:2203.03605},
+  year={2022}
+}
+
+@inproceedings{maskrcnn,
+  title={Mask {R-CNN}},
+  author={He, Kaiming and Gkioxari, Georgia and Doll{\'a}r, Piotr and Girshick, Ross},
+  booktitle={Proceedings of the IEEE international conference on computer vision},
+  pages={2961--2969},
+  year={2017}
+}
+
+@inproceedings{swin,
+  title={Swin transformer: {Hierarchical} vision transformer using shifted windows},
+  author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  booktitle={Proceedings of the IEEE/CVF international conference on computer vision},
+  pages={10012--10022},
+  year={2021}
+}
+
+@inproceedings{DOTA,
+  title={{DOTA}: {A} large-scale dataset for object detection in aerial images},
+  author={Xia, Gui-Song and Bai, Xiang and Ding, Jian and Zhu, Zhen and Belongie, Serge and Luo, Jiebo and Datcu, Mihai and Pelillo, Marcello and Zhang, Liangpei},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={3974--3983},
+  year={2018}
+}
+
+@inproceedings{AFOG,
+  title={Adversarial Attention Perturbations for Large Object Detection Transformers},
+  author={Yahn, Zachary and Tekin, Selim Furkan and Ilhan, Fatih and Hu, Sihao and Huang, Tiansheng and Xu, Yichang and Loper, Margaret and Liu, Ling},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={3184--3193},
+  year={2025}
+}
