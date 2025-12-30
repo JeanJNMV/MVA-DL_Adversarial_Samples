@@ -9,6 +9,7 @@ adv_VOC_YOLO_eps_*/
 
 models/
 predictions/
+*/output/
 
 .aux
 .bbl

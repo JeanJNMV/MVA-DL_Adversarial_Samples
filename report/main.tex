@@ -41,7 +41,7 @@ CentraleSup\'elec, ENS Paris-Saclay\\
 \begin{abstract}
 This paper presents a detailed study of the work
 ``Explaining and Harnessing Adversarial Examples''
-by Goodfellow et al. \cite{main}, analyzing the origin
+by Goodfellow \emph{et al.}\cite{main}, analyzing the origin
 of adversarial vulnerability in neural networks
 and the Fast Gradient Sign Method (FGSM).
 We further extend this analysis to object detection,
@@ -116,6 +116,23 @@ The error rate on adversarial examples generated via FGSM dropped from 89.4\% in
 
 The authors compared this approach to other regularization forms, finding that simple $L_1$ weight decay was insufficient. Coefficients small enough to permit successful training conferred no regularization benefit, while larger coefficients caused the model to get stuck with high training error. Similarly, adding random noise (zero mean and covariance) to inputs proved inefficient because the expected dot product between a weight vector and a random noise vector is zero.
 
+\begin{figure}[!htb]
+    \centering
+    % Plot (a)
+    \begin{subfigure}{0.49\linewidth}
+        \includegraphics[width=\linewidth]{img/screena.png}
+        \caption{}
+    \end{subfigure}
+    \hfill % Spacing between the two plots
+    % Plot (b)
+    \begin{subfigure}{0.49\linewidth}
+        \includegraphics[width=\linewidth]{img/screenb.png}
+        \caption{}
+    \end{subfigure}
+    
+    \caption{Weight visualizations of maxout networks trained on MNIST. Each row shows the filters for a single maxout unit. a) Naively trained model. b) Model with adversarial training (From \cite{main}).}
+    \label{fig:screen_weights}
+\end{figure}
 
 \subsection{Generalization of Adversarial Examples}
 A key finding of the paper is transferability, i.e. that adversarial examples generalize across different models and architectures. An example generated for one model is often misclassified by another, even if they have different architectures or training sets. The authors refute the hypothesis that adversarial examples exist in fine, isolated "pockets" of the input space. Instead, they demonstrate that these examples occupy broad, contiguous subspaces defined by the direction of the gradient.
@@ -140,116 +157,6 @@ Due to computational constraints, we focus on light-weight, one-stage detectors,
 Both detectors were trained on the COCO (Common Objects in Context) dataset, a comprehensive benchmark comprising 80 object categories and approximately 1.5 million instances \cite{COCO}. The adversarial evaluation was performed using the test subset of the VOC2007 dataset. VOC2007 is a widely used standard in object detection, containing nearly 5,000 images with 20 object classes, all of which are a subset of the COCO categories \cite{VOC}. \\
 To quantify detector degradation under attack, we employ the standard mean Average Precision (mAP) metric. The mAP represents the mean of Average Precision (AP) values, calculated by integrating the Precision-Recall curves for each class. Precision measures the ratio of true positives to total detections, while Recall measures the fraction of ground truth objects successfully detected. A prediction is considered a true positive if its Intersection over Union (IoU) with the ground truth exceeds a specific threshold. Following standard protocols \cite{OSFD, LGP, CAP}, we fix this threshold at 0.5. Finally, as adversarial perturbations must remain imperceptible, attack efficacy is evaluated based on the mAP drop relative to the perturbation magnitude $\varepsilon$.
 
-
-Figure \ref{fig:exdet} illustrates the variation in predicted bounding boxes for a single image across different perturbation magnitudes $\varepsilon$. As the perturbation increases, the detector's performance visibly declines. However, for $\varepsilon$ between 0.08 and 0.10, the noise becomes perceptually obvious, rendering the attack unsuitable for practical scenarios requiring imperceptibility. Beyond general performance degradation, adversarial attacks in object detection manifest in diverse failure modes. Figure \ref{fig:exoutputs} presents three distinct outcomes: fabrication, where the model detects non-existent objects; mislabeling, where the wrong class is predicted; and vanishing, where valid objects are erased from predictions. While FGSM produces all these outcomes as a "random outcome" attack, it is worth noting that other methods are designed to specialize in specific error types depending on the target application \cite{EBAD, CAA, PhantomSponges}.
-
-We quantify the impact of FGSM on detector performance in Figure \ref{fig:transf} (a), which plots the mAP against the perturbation magnitude $\varepsilon$ for the YOLO11n-generated samples. As anticipated, performance exhibits an inverse correlation with perturbation intensity. To assess attack transferability, we evaluate these samples on the SSDlite detector. Given the difference in baseline performance between the two models, Figure \ref{fig:transf} (b) presents the normalized performance (defined as the ratio of adversarial mAP to clean mAP). This comparison confirms that while the FGSM attack successfully transfers to SSDlite, the performance drop is less precipitous than on YOLO11n. This attenuation is expected, as the adversarial gradients were optimized specifically for the YOLO11n architecture.
-
-\subsection{Our Attempt at Adversarial Training}
-
-The adversarial training strategy employed for our object detection application is more streamlined than the theoretical framework discussed in Section \ref{sec:advtraintheo}. Specifically, we fine-tuned the YOLO11n detector using perturbed images to enhance robustness against attacks, following methodologies seen in the literature \cite{AdvtrainZhang, AdvtrainChen}. 
-
-The training utilized adversarial samples from the VOC2007 trainval subset \cite{VOC}, as described in the previous section. We performed a comparative analysis of the baseline YOLO11n detector, a version fine-tuned on clean images, and variants fine-tuned on adversarial examples generated with varying perturbation magnitudes $\varepsilon$. To ensure a fair comparison, training configurations remained consistent across all runs, utilizing a maximum of 30 epochs, a learning rate of $0.001$, and a batch size of 32.
-
-Figure \ref{fig:performance_comparison} (a) illustrates the performance of YOLO11n variants following adversarial training across various perturbation magnitudes. A fundamental trade-off is observed: as the detectors' robustness to attacks increases, their efficacy on clean images declines. Preserving high performance on unperturbed data is critical, as these images constitute the predominant input in real-world scenarios. Consequently, balancing standard accuracy with adversarial robustness is essential for effective adversarial training. To quantify this impact, Figure \ref{fig:performance_comparison} (b) details the performance of each detector specifically on clean images.
-
-Fine-tuning on clean VOC training images enhanced both the detector's performance on the clean test set and its robustness against moderate perturbations ($\varepsilon<0.10$). Resistance to these attacks is particularly critical, as they remain imperceptible to the human eye. This improvement is likely attributed to the reduction in the domain gap between the original pre-training dataset COCO and the target dataset VOC. While this benefit is not observed at larger perturbation magnitudes, performance in that regime degrades to such an extent that meaningful estimation becomes unreliable. As previously discussed, increasing the perturbation magnitude during fine-tuning enhances adversarial robustness but comes at the expense of accuracy on clean images. Our experiments reveal that fine-tuning with a low magnitude ($\varepsilon$=0.02) provides negligible defense against most attacks. Conversely, using a high magnitude ($\varepsilon$=0.20) causes performance on clean images to drop below acceptable thresholds. Therefore, we identify the range of $\varepsilon \in [0.08,0.10]$ as the optimal operating point in our case, offering the most appropriate balance between standard accuracy and adversarial robustness.
-
-\subsection{About the Imperceptibility Constraint}
-
-In section \ref{sec:advex}, we introduced the imperceptibility constraint as $||\bm{\eta}||_{\infty} < \varepsilon$, with a $L_\infty$ norm. However, as the primary constraint of adversarial attacks is imperceptibility, the definition must rely on the human eye perception. This raises the question of whether the $L_\infty$ norm is an adequate estimation for human perception. Figure \ref{fig:exdet} displays an image and its adversarial counterparts across various $\varepsilon$ values. While quantifying the precise sensitivity of the human eye is complex, the relationship seems non-linear: a numerical increment at a low magnitude (e.g., from 0.02 to 0.04) does not seem equivalent to the same increment at a higher magnitude (e.g., from 0.08 to 0.10). We propose to introduce alternative similarity measures designed to better estimate visible disturbance and evaluate their correlation with the evolution of $\varepsilon$.
-
-The first relevant metric to consider is the Structural Similarity Index Measure (SSIM), a perception-based method for estimating image similarity. Unlike simple pixel-wise distance metrics, SSIM accounts for structural dependency, the principle that spatially adjacent pixels exhibit strong inter-dependencies, while also incorporating perceptual factors such as luminance and contrast masking \cite{AdvART, ShiftAtt}. The second metric employed is Learned Perceptual Image Patch Similarity (LPIPS). LPIPS is explicitly designed to align with human visual perception by leveraging deep learning representations. It operates on the premise that internal activations within networks trained for high-level classification correlate strongly with human perceptual judgments. LPIPS computes the distance between images within a feature space using a pre-trained neural network (AlexNet in our experiments) \cite{LPIPS}.
-
-
-Figure \ref{fig:dist} illustrates the evolution of the $L_\infty$, SSIM, and LPIPS metrics as a function of $\varepsilon$. Specifically, Figure \ref{fig:dist} (a) depicts the average values, while Figure \ref{fig:dist} (b) displays the worst-case values, which are the primary interest when establishing safety constraints. As expected, Figure \ref{fig:dist} (b) confirms a direct linear correlation between $\varepsilon$ and the measured $L_\infty$ norm. The perceptual metrics, SSIM and LPIPS, exhibit non linear behavior, especially for the lower perturbation values ($\varepsilon<0.10$), as hypothesized. While incorporating these perceptual measures into the attack optimization process could present a mathematical challenge, they seem to provide a more relevant constraint for real-world scenarios.
-
-    
-
-\subsection{Discussion and Limitations}
-
-%\textbf{Key concepts :} In our case we were very limited by hardware, recent attacks are specialized, more diverse, often multi-shot, emphasizes on transferability across detectors/datasets/for defense across all types of attacks (black box philosophy). Real world applications ? also exist with patches or universal attacks ? if using finetuning, could we mix clean and adv images ?, Autres méthodes d'adv train ? Autres méthodes de défense ?
-
-As detailed in the section \ref{sec:attod}, our experimental scope is constrained by hardware limitations, which restricts our evaluation. Regarding object detectors, we were only able to deploy lightweight variants of one-stage models where larger or more advanced architectures might have demonstrated increased robustness. Two-stage detectors such as R-CNNs, which first generate region proposals and subsequently classify them, are also known to be more resilient to adversarial perturbations, prioritizing accuracy over inference speed \cite{BestSurvey}. 
-
-The attack method FGSM now represents a baseline approach in the adversarial machine learning literature. While computationally efficient and simple to implement, contemporary attack methods are typically more sophisticated, often relying on multi-step optimization procedures and exploiting specific vulnerabilities in detector components \cite{BestSurvey, PhantomSponges, OSFD}. Moreover, recent work places strong emphasis on transferability, aiming to produce perturbations that remain effective across a wide range of detector architectures and training pipelines \cite{OSFD, EBAD, CAA}. In realistic adversarial scenarios, attackers generally lack access to the defender’s model architecture, weights, training data, or configuration. Defenders, on the other hand, must anticipate attacks originating from diverse threat models and detector types, and therefore must carefully select the attack algorithm used for adversarial training, if such training is implemented, to ensure maximal robustness.
-
-Furthermore, although our study focuses on attacks aimed at remaining imperceptible to the human eye, many adversarial strategies in object detection rely on patch-based attacks. In such approaches, the adversarial effect is concentrated within a localized region of the image. These patches are typically not designed to be visually subtle but they are instead intended to be easily deployable in real-world settings due to their physical, sticker-like shape \cite{AdvPatchFeatEnergy, PatchFP, NaturalisticPatches}.
-
-Regarding our adversarial training protocol, while the approach proved effective, it would be valuable to examine the influence of the number of images for the fine-tuning process, as well as the impact of mixing clean and perturbed samples during training. It is also important to note that alternative adversarial training frameworks exist, some of which incorporate additional neural networks as discussed in \cite{AdvtrainGabor}, and that a variety of other defense methods have been proposed in the literature \cite{SeeingisntBelieving, ContextInconsistency, AnomalyLoc}.
-
-\section{Conclusion}
-
-In this report, we reviewed the article "Explaining and Harnessing Adversarial Examples" \cite{main}, which shows that adversarial examples arise from the linear behavior of high-dimensional neural networks, and studied FGSM as both an attack mechanism and a tool to perform adversarial training. 
-
-We extended this investigation to object detection, demonstrating that lightweight one-stage detectors remain highly sensitive to small bounded perturbations, which can induce object disappearance, misclassifications, or false detections. Despite the increased complexity of detection tasks, adversarial examples remained transferable between models. Adversarial training improved robustness but at the expected cost of reduced clean-image performance, with a limited perturbation range offering the best trade-off under our computational constraints.
-
-Finally, by comparing $L_\infty$ constraints with perceptual metrics such as SSIM and LPIPS, we observed that imperceptibility does not scale linearly with $\varepsilon$, suggesting that those distances might be more suitable to express the applied perturbations.
-
-
-\appendix
-\section*{Appendix: Figures}
-
-\begin{figure}[!htb]
-    \centering
-    % Plot (a)
-    \begin{subfigure}{0.49\linewidth}
-        \includegraphics[width=\linewidth]{img/screena.png}
-        \caption{}
-    \end{subfigure}
-    \hfill % Spacing between the two plots
-    % Plot (b)
-    \begin{subfigure}{0.49\linewidth}
-        \includegraphics[width=\linewidth]{img/screenb.png}
-        \caption{}
-    \end{subfigure}
-    
-    \caption{Weight visualizations of maxout networks trained on MNIST. Each row shows the filters for a single maxout unit. a) Naively trained model. b) Model with adversarial training (From \cite{main}).}
-    \label{fig:screen_weights}
-\end{figure}
-
-\setcounter{figure}{2}
-\begin{figure}[!htb]
-    \centering
-    % --- Row 1: Clean Images ---
-    \begin{subfigure}{0.32\linewidth}
-        \includegraphics[width=\linewidth]{img/output/000018.jpg} 
-        \caption{Clean Image}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.32\linewidth}
-        \includegraphics[width=\linewidth]{img/output/000049.jpg} 
-        \caption{Clean Image}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.32\linewidth}
-        \includegraphics[width=\linewidth]{img/009909_0.00.jpg}
-        \caption{Clean Image}
-    \end{subfigure}
-    
-    \medskip % Adds vertical space between the two rows
-
-    % --- Row 2: Adversarial Images ---
-    \begin{subfigure}{0.32\linewidth}
-        \includegraphics[width=\linewidth]{img/output/det_000018.jpg} 
-        \caption{Adv. (Fabrication)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.32\linewidth}
-        \includegraphics[width=\linewidth]{img/output/det_000049.jpg} 
-        \caption{Adv. (Mislabeling)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.32\linewidth}
-        \includegraphics[width=\linewidth]{img/009909_0.13.jpg}
-        \caption{Adv. (Vanishing)}
-    \end{subfigure}
-
-    \caption{Example of outputs generated by the adversarial attack.}
-    \label{fig:exoutputs}
-\end{figure}
-
-\setcounter{figure}{1}
 \begin{figure*}[!htb] % Use figure* for spanning both columns if needed, or figure for single column
     \centering
     % First image
@@ -306,33 +213,80 @@ Finally, by comparing $L_\infty$ constraints with perceptual metrics such as SSI
     \label{fig:exdet}
 \end{figure*}
 
-\setcounter{figure}{3}
-\begin{figure*}[!htb]
+Figure \ref{fig:exdet} illustrates the variation in predicted bounding boxes for a single image across different perturbation magnitudes $\varepsilon$. As the perturbation increases, the detector's performance visibly declines. However, for $\varepsilon$ between 0.08 and 0.10, the noise becomes perceptually obvious, rendering the attack unsuitable for practical scenarios requiring imperceptibility. Beyond general performance degradation, adversarial attacks in object detection manifest in diverse failure modes. Figure \ref{fig:exoutputs} presents three distinct outcomes: fabrication, where the model detects non-existent objects; mislabeling, where the wrong class is predicted; and vanishing, where valid objects are erased from predictions. While FGSM produces all these outcomes as a "random outcome" attack, it is worth noting that other methods are designed to specialize in specific error types depending on the target application \cite{EBAD, CAA, PhantomSponges}.
+
+\begin{figure}[!htb]
+    \centering
+    % --- Row 1: Clean Images ---
+    \begin{subfigure}{0.32\linewidth}
+        \includegraphics[width=\linewidth]{img/output/000018.jpg} 
+        \caption{Clean Image}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\linewidth}
+        \includegraphics[width=\linewidth]{img/output/000049.jpg} 
+        \caption{Clean Image}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\linewidth}
+        \includegraphics[width=\linewidth]{img/009909_0.00.jpg}
+        \caption{Clean Image}
+    \end{subfigure}
+    
+    \medskip % Adds vertical space between the two rows
+
+    % --- Row 2: Adversarial Images ---
+    \begin{subfigure}{0.32\linewidth}
+        \includegraphics[width=\linewidth]{img/output/det_000018.jpg} 
+        \caption{Adv. (Fabrication)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\linewidth}
+        \includegraphics[width=\linewidth]{img/output/det_000049.jpg} 
+        \caption{Adv. (Mislabeling)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\linewidth}
+        \includegraphics[width=\linewidth]{img/009909_0.13.jpg}
+        \caption{Adv. (Vanishing)}
+    \end{subfigure}
+
+    \caption{Example of outputs generated by the adversarial attack.}
+    \label{fig:exoutputs}
+\end{figure}
+
+We quantify the impact of FGSM on detector performance in Figure \ref{fig:transf} (a), which plots the mAP against the perturbation magnitude $\varepsilon$ for the YOLO11n-generated samples. As anticipated, performance exhibits an inverse correlation with perturbation intensity. To assess attack transferability, we evaluate these samples on the SSDlite detector. Given the difference in baseline performance between the two models, Figure \ref{fig:transf} (b) presents the normalized performance (defined as the ratio of adversarial mAP to clean mAP). This comparison confirms that while the FGSM attack successfully transfers to SSDlite, the performance drop is less precipitous than on YOLO11n. This attenuation is expected, as the adversarial gradients were optimized specifically for the YOLO11n architecture.
+
+\begin{figure}[!htb]
     \centering
     % Plot (a)
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        \includegraphics[width=0.8\linewidth]{img/transferability.png}
+    \begin{subfigure}{0.49\linewidth}
+        \includegraphics[width=\linewidth]{img/transferability.png}
         \caption{}
     \end{subfigure}
     \hfill % Spacing between the two plots
     % Plot (b)
-    \begin{subfigure}{0.48\linewidth}
-        \centering
-        \includegraphics[width=0.8\linewidth]{img/mapratio.png}
+    \begin{subfigure}{0.49\linewidth}
+        \includegraphics[width=\linewidth]{img/mapratio.png}
         \caption{}
     \end{subfigure}
     
     \caption{Comparison of YOLOv11n and SSDlite MobileNetV3 Models under Adversarial Perturbations with metrics a) mAP b) mAP ratio (to its maximum value on Clean Images).}
     \label{fig:transf}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}[!htb] % Use figure* to span both columns for better readability
+\subsection{Our Attempt at Adversarial Training}
+
+The adversarial training strategy employed for our object detection application is more streamlined than the theoretical framework discussed in Section \ref{sec:advtraintheo}. Specifically, we fine-tuned the YOLO11n detector using perturbed images to enhance robustness against attacks, following methodologies seen in the literature \cite{AdvtrainZhang, AdvtrainChen}. 
+
+The training utilized adversarial samples from the VOC2007 trainval subset \cite{VOC}, as described in the previous section. We performed a comparative analysis of the baseline YOLO11n detector, a version fine-tuned on clean images, and variants fine-tuned on adversarial examples generated with varying perturbation magnitudes $\varepsilon$. To ensure a fair comparison, training configurations remained consistent across all runs, utilizing a maximum of 30 epochs, a learning rate of $0.001$, and a batch size of 32.
+
+\begin{figure*}[t] % Use figure* to span both columns for better readability
    \centering
    % Subfigure (a)
    \begin{subfigure}{0.48\linewidth}
       \centering
-      \includegraphics[width=0.8\linewidth]{img/advtrained.png}
+      \includegraphics[width=\linewidth]{img/advtrained.png}
       \caption{Performance after Adversarial Training}
       \label{fig:advtrain}
    \end{subfigure}
@@ -340,7 +294,7 @@ Finally, by comparing $L_\infty$ constraints with perceptual metrics such as SSI
    % Subfigure (b)
    \begin{subfigure}{0.48\linewidth}
       \centering
-      \includegraphics[width=0.8\linewidth]{img/cleanperf.png}
+      \includegraphics[width=\linewidth]{img/cleanperf.png}
       \caption{Performance on Clean Images only}
       \label{fig:cleanperf}
    \end{subfigure}
@@ -348,6 +302,16 @@ Finally, by comparing $L_\infty$ constraints with perceptual metrics such as SSI
    \caption{Comparison of YOLOv11n Model Performance. (a) illustrates robustness against adversarial attacks, while (b) details the impact on clean image accuracy.}
    \label{fig:performance_comparison}
 \end{figure*}
+
+Figure \ref{fig:performance_comparison} (a) illustrates the performance of YOLO11n variants following adversarial training across various perturbation magnitudes. A fundamental trade-off is observed: as the detectors' robustness to attacks increases, their efficacy on clean images declines. Preserving high performance on unperturbed data is critical, as these images constitute the predominant input in real-world scenarios. Consequently, balancing standard accuracy with adversarial robustness is essential for effective adversarial training. To quantify this impact, Figure \ref{fig:performance_comparison} (b) details the performance of each detector specifically on clean images.
+
+Fine-tuning on clean VOC training images enhanced both the detector's performance on the clean test set and its robustness against moderate perturbations ($\varepsilon<0.10$). Resistance to these attacks is particularly critical, as they remain imperceptible to the human eye. This improvement is likely attributed to the reduction in the domain gap between the original pre-training dataset COCO and the target dataset VOC. While this benefit is not observed at larger perturbation magnitudes, performance in that regime degrades to such an extent that meaningful estimation becomes unreliable. As previously discussed, increasing the perturbation magnitude during fine-tuning enhances adversarial robustness but comes at the expense of accuracy on clean images. Our experiments reveal that fine-tuning with a low magnitude ($\varepsilon$=0.02) provides negligible defense against most attacks. Conversely, using a high magnitude ($\varepsilon$=0.20) causes performance on clean images to drop below acceptable thresholds. Therefore, we identify the range of $\varepsilon \in [0.08,0.10]$ as the optimal operating point in our case, offering the most appropriate balance between standard accuracy and adversarial robustness.
+
+\subsection{About the Imperceptibility Constraint}
+
+In section \ref{sec:advex}, we introduced the imperceptibility constraint as $||\bm{\eta}||_{\infty} < \varepsilon$, with a $L_\infty$ norm. However, as the primary constraint of adversarial attacks is imperceptibility, the definition must rely on the human eye perception. This raises the question of whether the $L_\infty$ norm is an adequate estimation for human perception. Figure \ref{fig:exdet} displays an image and its adversarial counterparts across various $\varepsilon$ values. While quantifying the precise sensitivity of the human eye is complex, the relationship seems non-linear: a numerical increment at a low magnitude (e.g., from 0.02 to 0.04) does not seem equivalent to the same increment at a higher magnitude (e.g., from 0.08 to 0.10). We propose to introduce alternative similarity measures designed to better estimate visible disturbance and evaluate their correlation with the evolution of $\varepsilon$.
+
+The first relevant metric to consider is the Structural Similarity Index Measure (SSIM), a perception-based method for estimating image similarity. Unlike simple pixel-wise distance metrics, SSIM accounts for structural dependency, the principle that spatially adjacent pixels exhibit strong inter-dependencies, while also incorporating perceptual factors such as luminance and contrast masking \cite{AdvART, ShiftAtt}. The second metric employed is Learned Perceptual Image Patch Similarity (LPIPS). LPIPS is explicitly designed to align with human visual perception by leveraging deep learning representations. It operates on the premise that internal activations within networks trained for high-level classification correlate strongly with human perceptual judgments. LPIPS computes the distance between images within a feature space using a pre-trained neural network (AlexNet in our experiments) \cite{LPIPS}.
 
 \begin{figure}[!htb]
     \centering
@@ -369,11 +333,34 @@ Finally, by comparing $L_\infty$ constraints with perceptual metrics such as SSI
     \label{fig:dist}
 \end{figure}
 
+Figure \ref{fig:dist} illustrates the evolution of the $L_\infty$, SSIM, and LPIPS metrics as a function of $\varepsilon$. Specifically, Figure \ref{fig:dist} (a) depicts the average values, while Figure \ref{fig:dist} (b) displays the worst-case values, which are the primary interest when establishing safety constraints. As expected, Figure \ref{fig:dist} (b) confirms a direct linear correlation between $\varepsilon$ and the measured $L_\infty$ norm. The perceptual metrics, SSIM and LPIPS, exhibit non linear behavior, especially for the lower perturbation values ($\varepsilon<0.10$), as hypothesized. While incorporating these perceptual measures into the attack optimization process could present a mathematical challenge, they seem to provide a more relevant constraint for real-world scenarios.
+
+    
+
+\subsection{Discussion and Limitations}
+
+%\textbf{Key concepts :} In our case we were very limited by hardware, recent attacks are specialized, more diverse, often multi-shot, emphasizes on transferability across detectors/datasets/for defense across all types of attacks (black box philosophy). Real world applications ? also exist with patches or universal attacks ? if using finetuning, could we mix clean and adv images ?, Autres méthodes d'adv train ? Autres méthodes de défense ?
+
+As detailed in the section \ref{sec:attod}, our experimental scope is constrained by hardware limitations, which restricts our evaluation. Regarding object detectors, we were only able to deploy lightweight variants of one-stage models where larger or more advanced architectures might have demonstrated increased robustness. Two-stage detectors such as R-CNNs, which first generate region proposals and subsequently classify them, are also known to be more resilient to adversarial perturbations, prioritizing accuracy over inference speed \cite{BestSurvey}. 
+
+The attack method FGSM now represents a baseline approach in the adversarial machine learning literature. While computationally efficient and simple to implement, contemporary attack methods are typically more sophisticated, often relying on multi-step optimization procedures and exploiting specific vulnerabilities in detector components \cite{BestSurvey, PhantomSponges, OSFD}. Moreover, recent work places strong emphasis on transferability, aiming to produce perturbations that remain effective across a wide range of detector architectures and training pipelines \cite{OSFD, EBAD, CAA}. In realistic adversarial scenarios, attackers generally lack access to the defender’s model architecture, weights, training data, or configuration. Defenders, on the other hand, must anticipate attacks originating from diverse threat models and detector types, and therefore must carefully select the attack algorithm used for adversarial training, if such training is implemented, to ensure maximal robustness.
+
+Furthermore, although our study focuses on attacks aimed at remaining imperceptible to the human eye, many adversarial strategies in object detection rely on patch-based attacks. In such approaches, the adversarial effect is concentrated within a localized region of the image. These patches are typically not designed to be visually subtle but they are instead intended to be easily deployable in real-world settings due to their physical, sticker-like shape \cite{AdvPatchFeatEnergy, PatchFP, NaturalisticPatches}.
+
+Regarding our adversarial training protocol, while the approach proved effective, it would be valuable to examine the influence of the number of images for the fine-tuning process, as well as the impact of mixing clean and perturbed samples during training. It is also important to note that alternative adversarial training frameworks exist, some of which incorporate additional neural networks as discussed in \cite{AdvtrainGabor}, and that a variety of other defense methods have been proposed in the literature \cite{SeeingisntBelieving, ContextInconsistency, AnomalyLoc}.
+
+\section{Conclusion}
+
+In this report, we reviewed the article "Explaining and Harnessing Adversarial Examples" \cite{main}, which shows that adversarial examples arise from the linear behavior of high-dimensional neural networks, and studied FGSM as both an attack mechanism and a tool to perform adversarial training. 
+
+We extended this investigation to object detection, demonstrating that lightweight one-stage detectors remain highly sensitive to small bounded perturbations, which can induce object disappearance, misclassifications, or false detections. Despite the increased complexity of detection tasks, adversarial examples remained transferable between models. Adversarial training improved robustness but at the expected cost of reduced clean-image performance, with a limited perturbation range offering the best trade-off under our computational constraints.
+
+Finally, by comparing $L_\infty$ constraints with perceptual metrics such as SSIM and LPIPS, we observed that imperceptibility does not scale linearly with $\varepsilon$, suggesting that those distances might be more suitable to express the applied perturbations.
+
 %------------------------------------------------
 {\footnotesize
 \bibliographystyle{ieeenat_fullname}
-\bibliography{refs,ref_CEA}
+\bibliography{refs,refs_additional}
 }
-
 
 \end{document}
