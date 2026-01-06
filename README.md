@@ -16,3 +16,5 @@ The scripts provided in this repository are as follows:
 - ```plot_results.py```: a script to plot the results of the evaluations, used in the report to generate the graphs.
 
 ```results_curves/``` is a folder containing the results of the evaluations in .json format. ```res_colab/``` is a folder containing the metrics obtained when fine-tuning the models on Google Colab.
+
+```report/``` is a folder containing the LaTeX source code of the report and ```slides/``` is a folder containing the LaTeX source code of the presentation slides.

@@ -10,6 +10,7 @@ adv_VOC_YOLO_eps_*/
 models/
 predictions/
 */output/
+detected_images/
 
 .aux
 .bbl
