@@ -1,7 +1,7 @@
 # Deep Learning: Article study
 ## Explaining and Harnessing Adversarial Examples
 
-This repository contains the code related to the review by Adonis Jamal and Jean-Vincent Martini of the article "Explaining and Harnessing Adversarial Examples", written Ian J. Goodfellow, Jonathon Shlens, and Christian Szegedy, for the Deep Learning course of master's degree MVA and CentraleSupélec.
+This repository contains the code related to the review by Adonis Jamal and Jean-Vincent Martini of the article "Explaining and Harnessing Adversarial Examples", written Ian J. Goodfellow, Jonathon Shlens, and Christian Szegedy, for the Deep Learning course of MVA master's degree (ENS Paris-Saclay) and CentraleSupélec.
 
 Specifically, this code implements the Fast Gradient Sign Method (FGSM) to generate adversarial examples in object detection using mostly the YOLO11n model on the VOC dataset.
 
