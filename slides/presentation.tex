@@ -95,7 +95,7 @@
         \column{0.4\textwidth}
         \centering
         \includegraphics[width=0.9\linewidth]{../report/img/009909_0.00.jpg} \\
-        \footnotesize{Clean Detection (Confidence 0.70)}
+        \footnotesize{Clean Detection}
     \end{columns}
 \end{frame}
 
@@ -119,10 +119,16 @@
         \includegraphics[width=\linewidth, height=0.8\linewidth]{../report/img/009909_0.13.jpg}
         \footnotesize{\textbf{Vanishing:} Valid objects erased from prediction.}
     \end{columns}
-    
-    \vspace{0.3cm}
-    \textbf{Transferability:} Attacks generated for YOLO11n also degraded SSDlite (Black-box scenario), confirming the universality of the vulnerability.
+
 \end{frame}
+
+\begin{frame}{Attack Results: mAP Degradation and Transferability}
+        \textbf{Transferability:} Attacks generated for YOLO11n also degraded SSDlite (Black-box scenario), confirming the universality of the vulnerability.
+    \vspace{0.3cm}
+    \centering
+    \includegraphics[width=0.65\linewidth]{../report/img/transferability.png}
+\end{frame}
+    
 
 \subsection{Defense Results}
 \begin{frame}{Adversarial Training: The Trade-off}
