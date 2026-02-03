@@ -5,12 +5,17 @@ import torch
 from ultralytics import YOLO
 from tqdm import tqdm
 
-MODEL_PATH = "models/yolo11n.pt"
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description="Run YOLO detection on a folder of images."
+    )
+
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="models/yolo11n.pt",
+        help="Path to the YOLO model (default: models/yolo11n.pt).",
     )
 
     parser.add_argument(
@@ -27,12 +32,26 @@ def parse_arguments():
         help="Confidence threshold for detections (default: 0.5).",
     )
 
+    parser.add_argument(
+        "--output_folder",
+        type=str,
+        default=None,
+        help="Path to the output folder. Default: predicted_bboxes/{dataset}/{split}/{model_name}",
+    )
+
     return parser.parse_args()
 
 
-def run_detection(input_folder, confidence):
-    # Create an output structure that mirrors the input path inside 'detected_images'
-    output_folder = os.path.join("detected_images", input_folder)
+def run_detection(input_folder, confidence, model_path, output_folder=None):
+    # Build default output folder: predictions/{dataset}/{split}/{model_name}
+    if output_folder is None:
+        # Extract dataset name and split from input_folder (e.g., "adv_VOC_YOLO_eps_0.00/images/val")
+        path_parts = input_folder.rstrip(os.sep).split(os.sep)
+        split = path_parts[-1] if path_parts else "val"
+        dataset = path_parts[0] if path_parts else "dataset"
+        # Extract model name without extension
+        model_name = os.path.splitext(os.path.basename(model_path))[0]
+        output_folder = os.path.join("predicted_bboxes", dataset, split, model_name)
     os.makedirs(output_folder, exist_ok=True)
 
     if torch.cuda.is_available():
@@ -42,10 +61,10 @@ def run_detection(input_folder, confidence):
     else:
         device = "cpu"
 
-    print(f"Loading model ({MODEL_PATH}) on {device}...")
+    print(f"Loading model ({model_path}) on {device}...")
 
     try:
-        model = YOLO(MODEL_PATH)
+        model = YOLO(model_path)
         model.to(device)
     except Exception as e:
         print(f"Error loading model: {e}")
@@ -88,4 +107,4 @@ def run_detection(input_folder, confidence):
 
 if __name__ == "__main__":
     args = parse_arguments()
-    run_detection(args.input_folder, args.conf)
+    run_detection(args.input_folder, args.conf, args.model, args.output_folder)

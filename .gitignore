@@ -10,6 +10,8 @@ adv_VOC_YOLO_eps_*/
 predictions/
 */output/
 detected_images/
+predicted_bboxes/
+runs/
 
 .aux
 .bbl

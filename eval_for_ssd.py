@@ -1,6 +1,5 @@
 import argparse
 import json
-import numpy as np
 from pathlib import Path
 from tqdm import tqdm
 import torch
@@ -8,12 +7,10 @@ import torchvision
 from torchvision.transforms import functional as F
 from PIL import Image
 
-DEFAULT_EPS_LIST = [0.00, 0.02, 0.04, 0.06, 0.08, 0.10, 0.13, 0.17, 0.20]
+from constant import DEFAULT_EPS_LIST, COCO_TO_VOC_SSD
+from utils import evaluate_map
 
-MODEL_NAME = "ssdlite_mobilenet_v3"
-ROOT = Path(".")  # root folder where adv_VOC_YOLO_eps_xx folders are
-RESULTS_DIR = Path(f"results_curves/{MODEL_NAME}")
-RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+DEFAULT_MODEL_NAME = "ssdlite_mobilenet_v3"
 
 
 def parse_arguments():
@@ -21,138 +18,23 @@ def parse_arguments():
     parser.add_argument(
         "--epsilon",
         type=float,
+        nargs="+",
+        default=DEFAULT_EPS_LIST,
+        help="List of epsilon values to evaluate (default: all values in DEFAULT_EPS_LIST).",
+    )
+    parser.add_argument(
+        "--model_name",
+        type=str,
+        default=DEFAULT_MODEL_NAME,
+        help=f"Model name for output folder (default: {DEFAULT_MODEL_NAME})",
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
         default=None,
-        help="Specific epsilon to evaluate. If None, runs all default values.",
+        help="Output JSON file path. If None, saves to results/<model_name>/results.json",
     )
     return parser.parse_args()
-
-
-COCO_TO_VOC = {
-    5: 0,  # airplane    -> aeroplane
-    2: 1,  # bicycle     -> bicycle
-    16: 2,  # bird        -> bird
-    9: 3,  # boat        -> boat
-    44: 4,  # bottle      -> bottle
-    6: 5,  # bus         -> bus
-    3: 6,  # car         -> car
-    17: 7,  # cat         -> cat
-    62: 8,  # chair       -> chair
-    21: 9,  # cow         -> cow
-    67: 10,  # dining table -> diningtable
-    18: 11,  # dog         -> dog
-    19: 12,  # horse       -> horse
-    4: 13,  # motorcycle  -> motorbike
-    1: 14,  # person      -> person
-    64: 15,  # potted plant -> pottedplant
-    20: 16,  # sheep       -> sheep
-    63: 17,  # couch       -> sofa
-    7: 18,  # train       -> train
-    72: 19,  # tv          -> tvmonitor
-}
-
-VOC_CLASS_COUNT = 20
-
-
-def compute_iou(box1, box2):
-    xA = max(box1[0], box2[0])
-    yA = max(box1[1], box2[1])
-    xB = min(box1[2], box2[2])
-    yB = min(box1[3], box2[3])
-    interW = max(0, xB - xA)
-    interH = max(0, yB - yA)
-    interArea = interW * interH
-    area1 = (box1[2] - box1[0]) * (box1[3] - box1[1])
-    area2 = (box2[2] - box2[0]) * (box2[3] - box2[1])
-    return interArea / (area1 + area2 - interArea + 1e-6)
-
-
-def voc_ap(rec, prec):
-    mprec = np.concatenate(([0.0], prec, [0.0]))
-    mrec = np.concatenate(([0.0], rec, [1.0]))
-    for i in range(len(mprec) - 2, -1, -1):
-        mprec[i] = max(mprec[i], mprec[i + 1])
-    idx = np.where(mrec[1:] != mrec[:-1])[0]
-    return np.sum((mrec[idx + 1] - mrec[idx]) * mprec[idx + 1])
-
-
-def evaluate_map(gt_folder, pred_folder, iou_thresh=0.5, num_classes=VOC_CLASS_COUNT):
-    aps = []
-    gt_files = {f.stem: f for f in Path(gt_folder).glob("*.txt")}
-    pred_files = {f.stem: f for f in Path(pred_folder).glob("*.txt")}
-
-    for cls_id in range(num_classes):
-        scores, matches = [], []
-        npos = 0
-
-        for stem, gt_file in gt_files.items():
-            pred_file = pred_files.get(stem, None)
-
-            # GT boxes
-            gt_boxes = []
-            with open(gt_file) as f:
-                for line in f:
-                    parts = line.split()
-                    cid = int(parts[0])
-                    if cid != cls_id:
-                        continue
-                    xc, yc, w, h = map(float, parts[1:])
-                    x1 = xc - w / 2
-                    y1 = yc - h / 2
-                    x2 = xc + w / 2
-                    y2 = yc + h / 2
-                    gt_boxes.append([x1, y1, x2, y2])
-            npos += len(gt_boxes)
-
-            # Predictions
-            pred_boxes = []
-            if pred_file and pred_file.exists():
-                with open(pred_file) as f:
-                    for line in f:
-                        parts = line.split()
-                        cid = int(parts[0])
-                        if cid != cls_id:
-                            continue
-                        xc, yc, w, h, score = map(float, parts[1:])
-                        x1 = xc - w / 2
-                        y1 = yc - h / 2
-                        x2 = xc + w / 2
-                        y2 = yc + h / 2
-                        pred_boxes.append([x1, y1, x2, y2, score])
-
-            pred_boxes.sort(key=lambda x: x[4], reverse=True)
-            used = set()
-            for pb in pred_boxes:
-                best_iou = 0
-                best_j = -1
-                for j, gb in enumerate(gt_boxes):
-                    if j in used:
-                        continue
-                    iou = compute_iou(pb[:4], gb)
-                    if iou > best_iou:
-                        best_iou = iou
-                        best_j = j
-                scores.append(pb[4])
-                if best_iou >= iou_thresh and best_j >= 0:
-                    matches.append(1)
-                    used.add(best_j)
-                else:
-                    matches.append(0)
-
-        if len(scores) == 0:
-            aps.append(0.0)
-            continue
-
-        scores = np.array(scores)
-        matches = np.array(matches)
-        order = np.argsort(-scores)
-        matches = matches[order]
-        tp = np.cumsum(matches)
-        fp = np.cumsum(1 - matches)
-        rec = tp / (npos + 1e-6)
-        prec = tp / (tp + fp + 1e-6)
-        aps.append(voc_ap(rec, prec))
-
-    return np.mean(aps)
 
 
 def load_ssdlite(device):
@@ -166,14 +48,20 @@ def load_ssdlite(device):
 def run_eval():
     args = parse_arguments()
 
-    if args.epsilon is not None:
-        eps_list = [args.epsilon]
-    else:
-        eps_list = DEFAULT_EPS_LIST
+    root = Path(".")
 
-    if torch.backends.mps.is_available():
-        device = torch.device("mps")
-    elif torch.cuda.is_available():
+    eps_list = args.epsilon
+    model_name = args.model_name
+
+    results_dir = Path(f"results/{model_name}")
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    if args.output is not None:
+        json_path = Path(args.output)
+    else:
+        json_path = results_dir / "results.json"
+
+    if torch.cuda.is_available():
         device = torch.device("cuda")
     else:
         device = torch.device("cpu")
@@ -183,7 +71,6 @@ def run_eval():
 
     SCORE_THRESHOLD = 0.1
 
-    json_path = RESULTS_DIR / "results.json"
     if json_path.exists():
         with open(json_path, "r") as f:
             try:
@@ -196,14 +83,14 @@ def run_eval():
     for eps in eps_list:
         print(f"\n=== Evaluating epsilon = {eps:.2f} ===")
 
-        images_folder = ROOT / f"adv_VOC_YOLO_eps_{eps:.2f}/images/val"
-        labels_folder = ROOT / f"adv_VOC_YOLO_eps_{eps:.2f}/labels/val"
+        images_folder = root / f"adv_VOC_YOLO_eps_{eps:.2f}/images/val"
+        labels_folder = root / f"adv_VOC_YOLO_eps_{eps:.2f}/labels/val"
 
         if not images_folder.exists():
             print(f"Skipping epsilon={eps:.2f}: Folder not found at {images_folder}")
             continue
 
-        preds_dir = Path(f"predictions/{MODEL_NAME}_eps_{eps:.2f}")
+        preds_dir = Path(f"predictions/{model_name}_eps_{eps:.2f}")
         preds_dir.mkdir(parents=True, exist_ok=True)
 
         img_files = list(images_folder.glob("*.*"))
@@ -228,9 +115,9 @@ def run_eval():
                             continue
                         if score < SCORE_THRESHOLD:  # ignore low-confidence
                             continue
-                        if int(raw_cid) not in COCO_TO_VOC:
+                        if int(raw_cid) not in COCO_TO_VOC_SSD:
                             continue
-                        cid = COCO_TO_VOC[int(raw_cid)]
+                        cid = COCO_TO_VOC_SSD[int(raw_cid)]
 
                         x1, y1, x2, y2 = box
                         xc = (x1 + x2) / 2 / W

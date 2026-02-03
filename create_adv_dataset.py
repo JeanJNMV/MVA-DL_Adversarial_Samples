@@ -8,6 +8,8 @@ from pathlib import Path
 from tqdm import tqdm
 from ultralytics import YOLO
 
+from constant import INPUT_SIZE, CLASSES
+
 
 # Argument Parsing
 def parse_arguments():
@@ -35,34 +37,14 @@ def parse_arguments():
         help="Path to the source dataset (default: VOC_YOLO)",
     )
 
+    parser.add_argument(
+        "--model_name",
+        type=str,
+        default="models/yolo11n.pt",
+        help="Path to the model .pt file (default: models/yolo11n.pt)",
+    )
+
     return parser.parse_args()
-
-
-# Constants
-MODEL_PATH = "models/yolo11n.pt"
-INPUT_SIZE = 640
-CLASSES = [
-    "aeroplane",
-    "bicycle",
-    "bird",
-    "boat",
-    "bottle",
-    "bus",
-    "car",
-    "cat",
-    "chair",
-    "cow",
-    "diningtable",
-    "dog",
-    "horse",
-    "motorbike",
-    "person",
-    "pottedplant",
-    "sheep",
-    "sofa",
-    "train",
-    "tvmonitor",
-]
 
 
 # FGSM Attack
@@ -129,20 +111,18 @@ def main():
 
     if torch.cuda.is_available():
         device = "cuda"
-    elif torch.backends.mps.is_available():
-        device = "mps"
     else:
         device = "cpu"
     print(f"Running on {device} with Epsilon={args.epsilon}...")
 
-    # 2. Load Model
+    # Load Model
     # Ensure the model file exists or let Ultralytics handle download/path
     try:
-        model = YOLO(MODEL_PATH)
+        model = YOLO(args.model_name)
         model.to(device)
     except Exception as e:
         print(
-            f"Error loading model from {MODEL_PATH}. Ensure the path is correct.\n{e}"
+            f"Error loading model from {args.model_name}. Ensure the path is correct.\n{e}"
         )
         return
 

@@ -23,7 +23,7 @@ def main():
 
     os.makedirs("models", exist_ok=True)
 
-    model = YOLO("yolo11n.pt")
+    model = YOLO("models/yolo11n.pt")
 
     print(f"Starting training with Epsilon identifier: {args.epsilon:.2f}")
 

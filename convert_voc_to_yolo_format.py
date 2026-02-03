@@ -3,29 +3,7 @@ import xml.etree.ElementTree as ET
 import shutil
 import argparse
 
-# VOC classes
-CLASSES = [
-    "aeroplane",
-    "bicycle",
-    "bird",
-    "boat",
-    "bottle",
-    "bus",
-    "car",
-    "cat",
-    "chair",
-    "cow",
-    "diningtable",
-    "dog",
-    "horse",
-    "motorbike",
-    "person",
-    "pottedplant",
-    "sheep",
-    "sofa",
-    "train",
-    "tvmonitor",
-]
+from constant import CLASSES
 
 
 def voc_to_yolo_bbox(bbox, img_w, img_h):

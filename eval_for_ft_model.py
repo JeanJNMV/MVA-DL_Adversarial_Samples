@@ -3,6 +3,8 @@ import json
 from pathlib import Path
 from ultralytics import YOLO
 
+from constant import DEFAULT_EPS_LIST
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
@@ -12,21 +14,26 @@ def parse_arguments():
     parser.add_argument(
         "--epsilon",
         type=float,
-        default=None,
-        help="Specific epsilon to evaluate (e.g., 0.02). If None, runs all default values.",
+        nargs="+",
+        default=DEFAULT_EPS_LIST,
+        help="List of epsilon values to evaluate (default: all values in DEFAULT_EPS_LIST).",
     )
 
     parser.add_argument(
         "--model_name",
         type=str,
-        default="models/yolo11n.pt",
-        help="Path to the model .pt file. MUST BE FINE-TUNED ON VOC ! (default: models/yolo11n.pt)",
+        default="models/yolo11n_000.pt",
+        help="Path to the model .pt file. MUST BE FINE-TUNED ON VOC ! (default: models/yolo11n_000.pt)",
+    )
+
+    parser.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="Output JSON file path. If None, saves to results/<model_name>/results.json",
     )
 
     return parser.parse_args()
-
-
-DEFAULT_EPS_LIST = [0.00, 0.02, 0.04, 0.06, 0.08, 0.10, 0.13, 0.17, 0.20]
 
 
 def run_eval():
@@ -36,14 +43,15 @@ def run_eval():
     model_name_stem = Path(model_path).stem
     root = Path(".")
 
-    if args.epsilon is not None:
-        eps_list = [args.epsilon]
-    else:
-        eps_list = DEFAULT_EPS_LIST
+    eps_list = args.epsilon
 
-    results_dir = Path(f"results_curves/{model_name_stem}")
+    results_dir = Path(f"results/{model_name_stem}")
     results_dir.mkdir(parents=True, exist_ok=True)
-    json_path = results_dir / "results.json"
+
+    if args.output is not None:
+        json_path = Path(args.output)
+    else:
+        json_path = results_dir / "results.json"
 
     if json_path.exists():
         with open(json_path, "r") as f:
@@ -54,7 +62,7 @@ def run_eval():
     else:
         results_dict = {}
 
-    device = "cpu"  # Set to CPU to avoid errors with MPS/CUDA during testing
+    device = "cpu"
 
     print(f"\nLoading model '{model_path}' on {device.upper()}...")
     try:
